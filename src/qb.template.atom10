@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<feed xmlns='http://www.w3.org/2005/Atom'>
+
+	<id>http://scytale.de/qb/?atom10</id>
+	<title>scytale.de</title>
+	<link href='http://scytale.de/qb/'/>
+	<link rel='self' href='http://scytale.de/qb/?atom10'/>
+	<qb:ifset:modified><updated><qb:date><qb:modified/>c</qb:date></updated></qb:ifset:modified>
+
+<qb:content/>
+
+</feed>

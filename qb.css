@@ -1,0 +1,92 @@
+body {
+	padding:0px;
+	margin:0px;
+}
+
+/*a, a:link, a:visited, a:focus, a:hover, a:active*/
+
+h1 {
+	margin:0px;
+	letter-spacing:0.5em;
+	text-align:right;
+	background-color:#ccc;
+	color:#800;
+	font-family:serif;
+	text-transform:uppercase;
+	border-bottom:1px solid #aaa;
+	text-decoration:none;
+}
+
+h1 a, h1 a:link, h1 a:visited, h1 a:focus, h1 a:hover, h1 a:active {
+	background-color:#ccc;
+	color:#800;
+	font-family:serif;
+	text-transform:uppercase;
+	letter-spacing:0.5em;
+	text-decoration:none;
+}
+
+h3 {
+	font-size:125%;
+	color:#008;
+	font-family:serif;
+	font-variant:small-caps;
+	letter-spacing:0.3em;
+	text-align:left;
+	margin-top:2em;
+	margin-left:2em;
+	margin-right:5em;
+	text-decoration:none;
+}
+
+h3 a, h3 a:link, h3 a:visited, h3 a:focus, h3 a:hover, h3 a:active {
+	color:#008;
+	font-family:serif;
+	font-variant:small-caps;
+	letter-spacing:0.3em;
+	text-decoration:none;
+}
+
+div#ye_olde {
+	font-family:sans-serif;
+	font-size:90%;
+	font-weight:bold;
+	float:right;
+	background-color:#ddd;
+	padding:0.3em;
+	border-left:1px solid #bbb;
+	border-bottom:1px solid #bbb;
+}
+
+div#content {
+	clear:both;
+	margin-left:10%;
+	margin-right:10%;
+	font-family:sans-serif;
+}
+
+div.tags, div.via, div.date {
+	font-size:90%;
+	color:#aaa;
+	text-align:right;
+}
+
+em em {
+	font-weight:bold;
+}
+
+span.tag {
+	white-space:nowrap;
+	margin-left:1em;
+}
+
+span.label {
+	font-weight:bold;
+}
+
+pre.shell {
+	background-color:#000;
+	color:#aaa;
+	padding:0.5em;
+	margin-left:1.5em;
+}

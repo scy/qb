@@ -1,0 +1,13 @@
+This is qb's svn version.
+
+qb is a small and hacky blog system, so expect the source code to be hacky and
+the documentation to be small.
+
+The current code and configuration files are those of scytale.de. That means two
+things: First, you'll want to change it. Second, you'll have some nice examples.
+
+Questions please to scy-dev-qb@scytale.de.
+
+I'm not quite sure whether qb will be developed further, because I'm already
+planning a new system. Information about that will be available in this
+repository, if there's going to be a new system.
