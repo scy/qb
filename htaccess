@@ -1,0 +1,12 @@
+# Of course this needs to be renamed to ".htaccess".
+
+# No magic in here.
+
+RewriteEngine On
+
+DirectoryIndex qb.php
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ qb.php?$1 [L,QSA]
+
