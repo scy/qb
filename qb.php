@@ -39,7 +39,7 @@ if (is_file($realpath.QB_SUF_SRC)) {
 }
 
 $template = 'html';
-if ($requri[1] == 'atom10')
+if ((count($requri) > 1) && ($requri[1] == 'atom10'))
 	$template = $requri[1];
 
 if (count($matches) > 0) {
