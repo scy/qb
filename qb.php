@@ -144,12 +144,6 @@ function qb_template($template, $data) {
 
 ///// STUFF AFTER HERE IS (HOPEFULLY) NOT USED ANYMORE AND WILL BE REMOVED SOON /////
 
-define('QB_TITLE_PRE', '<h3>');
-define('QB_TITLE_SUF', '</h3>');
-define('QB_META', 'meta/');
-define('QB_SUF_REP', '.regexed');
-define('QB_SUF_SPT', '.spot');
-
 function qb_die($msg) {
 	die("<strong>qb died:</strong> $msg\n");
 }
