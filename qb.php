@@ -48,7 +48,7 @@ if (count($matches) > 0) {
 	foreach ($matches as $ctime=>$paths)
 		foreach ($paths as $match) {
 			$content .= qb_buildpage($match, $template);
-			$mtime = filemtime(QB_SRC.$path.QB_SUF_SRC);
+			$mtime = filemtime(QB_SRC.$match.QB_SUF_SRC);
 			if ($mtime > $lastmtime)
 				$lastmtime = $mtime;
 		}
