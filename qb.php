@@ -7,7 +7,7 @@ $mime = array(
 	'atom10' => 'application/atom+xml',
 );
 
-$url = $_SERVER['SCRIPT_URL'];
+$url = $_SERVER['REQUEST_URI'];
 if (substr($url, 0, strlen(QB_URLBASE)) == QB_URLBASE)
 	$url = substr($url, strlen(QB_URLBASE));
 $url = preg_replace('|/+|', '/', $url);
