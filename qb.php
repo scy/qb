@@ -7,7 +7,8 @@ $mime = array(
 	'atom10' => 'application/atom+xml',
 );
 
-$url = $_SERVER['REQUEST_URI'];
+$requri = explode('?', $_SERVER['REQUEST_URI'], 2);
+$url = $requri[0];
 if (substr($url, 0, strlen(QB_URLBASE)) == QB_URLBASE)
 	$url = substr($url, strlen(QB_URLBASE));
 $url = preg_replace('|/+|', '/', $url);
@@ -38,8 +39,8 @@ if (is_file($realpath.QB_SUF_SRC)) {
 }
 
 $template = 'html';
-if ($_SERVER['QUERY_STRING'] == 'atom10')
-	$template = $_SERVER['QUERY_STRING'];
+if ($requri[1] == 'atom10')
+	$template = $requri[1];
 
 if (count($matches) > 0) {
 	krsort($matches);
