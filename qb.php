@@ -60,9 +60,6 @@ if (count($matches) > 0) {
 	echo(qb_template(QB_TPL_PAGE.'.'.$template, $meta));
 }
 
-/*if ($_SERVER['REDIRECT_STATUS'] == 404)
-	header($_SERVER['SERVER_PROTOCOL'] . ' 200 Generated For You');*/
-
 function qb_buildpage($path, $template = 'html') {
 	$filename = QB_SRC.$path.QB_SUF_SRC;
 	if (($t = @file_get_contents($filename)) === false) {
@@ -142,96 +139,5 @@ function qb_template($template, $data) {
 	$t = qb_runpattern($regex, $t);
 	return ($t);
 }
-
-///// STUFF AFTER HERE IS (HOPEFULLY) NOT USED ANYMORE AND WILL BE REMOVED SOON /////
-
-function qb_die($msg) {
-	die("<strong>qb died:</strong> $msg\n");
-}
-
-function qb_404($path) {
-	die('quoth the server, 404.');
-}
-
-// $path needs to be sane
-function qb_article($path) {
-	$cachefile = QB_META.$path.QB_SUF_REP;
-	$sourcefile = QB_SRC.$path.QB_SUF_SRC;
-	$spotfile = QB_META.$path.QB_SUF_SPT;
-	$regen = false;
-	$m = false;
-	if (file_exists($cachefile)) {
-		// Cache file exists, compare modification dates. If source file doesn't
-		// exist, regeneration is triggered and the error is handled there.
-		$m = @filemtime($sourcefile);
-		if ((@filemtime($cachefile) < $m) || ($m === false))
-			$regen = true;
-	} else
-		$regen = true;
-	if ($regen) {
-		$t = @file($sourcefile);
-		if ($t === false) {
-			@unlink($cachefile);
-			@unlink($spotfile);
-			qb_404($path);
-			return (false);
-		} else {
-			$time = time();
-			if (($m !== false) && ($m < $time))
-				$time = $m;
-			if (!file_exists($spotfile))
-				if (!@file_put_contents($spotfile, $time))
-					qb_die('could not spot '.htmlspecialchars($path));
-			$title = QB_TITLE_PRE . htmlspecialchars(trim($t[0])) . QB_TITLE_SUF;
-			unset($t[0]);
-			$t = "$title\n" . implode('', $t);
-			$t = qb_regex($t);
-			if (!file_put_contents($cachefile, $t))
-				qb_die('could not cache '.htmlspecialchars($path));
-		}
-	}
-	return (file_get_contents($cachefile));
-}
-
-function qb_page($text) {
-	$title = preg_replace('|<.+>|U', '', substr($text, 0, strpos($text, "\n")));
-	qb_page_header('<title>'.htmlspecialchars($title).QB_HEADTITLE_SUF.'</title>'."\n");
-	echo($text);
-	qb_page_footer();
-}
-
-function qb_page_header($text = '') {
-	echo("<?xml version='1.0' encoding='UTF-8' ?".">\n");
-	echo("<html>\n<head>\n");
-	echo($text);
-	echo("</head>\n<body>\n");
-}
-
-function qb_page_footer($text = '') {
-	echo($text);
-	echo("</body>\n</html>\n");
-}
-
-function qb_regex($text) {
-	global $qb_regex;
-	foreach ($qb_regex as $pattern => $replacement) {
-		$text = preg_replace($pattern, $replacement, $text);
-	}
-	return ($text);
-}
-
-function qb_serve() {
-	$url = $_SERVER['SCRIPT_URL'];
-	if (substr($url, 0, strlen(QB_PATH)) == QB_PATH)
-		$url = substr($url, strlen(QB_PATH));
-	if (QB_NODOT)
-		$url = str_replace('.', '', $url);
-	if (file_exists(QB_SRC.$url.QB_SUF_SRC))
-		qb_page(qb_article($url));
-	else
-		qb_404($url);
-
-}
-
 
 ?>
