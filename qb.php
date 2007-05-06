@@ -68,7 +68,7 @@ $page = 1;
 $templates = array_keys($mime);
 $template = $templates[0];
 if (count($requri) > 1) {
-	$qs = $requri[1]:
+	$qs = $requri[1];
 	// If there's a query string, check if it's a template name.
 	if (array_key_exists($qs, $mime)) {
 		// It's a template name, so choose this as the template.
