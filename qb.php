@@ -91,7 +91,7 @@ foreach ($matches as $paths) {
 }
 if (defined('QB_MAXITEMS')) { // If pagination is in use.
 	// How many pages are there?
-	$meta['numpages'] = floor(count($items) / QB_MAXITEMS) + 1;
+	$meta['numpages'] = ceil(count($items) / QB_MAXITEMS);
 	// If there's more than one page, set "pages".
 	if ($meta['numpages'] > 1) {
 		$meta['pages'] = $meta['numpages'];
