@@ -62,12 +62,17 @@ if (is_file($realpath.QB_SUF_SRC)) {
 	}
 }
 
-// Choose the template to use. Default is "html".
-// TODO: Rewrite this to support all templates in $mime automatically.
-$template = 'html';
-// If there's a query string and it's "atom10", set the template accordingly.
-if ((count($requri) > 1) && ($requri[1] == 'atom10'))
-	$template = $requri[1];
+// Choose the template to use. Defaults to first in $mime.
+$templates = array_keys($mime);
+$template = $templates[0];
+if (count($requri) > 1) {
+	$qs = $requri[1]:
+	// If there's a query string, check if it's a template name.
+	if (array_key_exists($qs, $mime)) {
+		// It's a template name, so choose this as the template.
+		$template = $qs;
+	}
+}
 
 // If there has been at least one file found:
 if (count($matches) > 0) {
