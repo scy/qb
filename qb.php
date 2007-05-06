@@ -62,6 +62,8 @@ if (is_file($realpath.QB_SUF_SRC)) {
 	}
 }
 
+// Requested page defaults to 1.
+$page = 1;
 // Choose the template to use. Defaults to first in $mime.
 $templates = array_keys($mime);
 $template = $templates[0];
@@ -71,32 +73,60 @@ if (count($requri) > 1) {
 	if (array_key_exists($qs, $mime)) {
 		// It's a template name, so choose this as the template.
 		$template = $qs;
+		// If feeds should be shortened, set $page to 1, else to -1.
+		$page = (QB_SHORTEN_FEEDS) ? (1) : (-1);
 	} elseif ((is_int($qs)) && ($qs > 0)) {
 		// If it's a positive integer, use it as page number.
 		$page = (int)$qs;
 	}
 }
 
-// If there has been at least one file found:
-if (count($matches) > 0) {
-	// Sort by date created, newest first.
-	krsort($matches);
+// Sort by date created, newest first.
+krsort($matches, SORT_NUMERIC);
+$items = array();
+// Flatten the matches, sorting "synchronous" files alphabetically.
+foreach ($matches as $paths) {
+	sort($paths, SORT_STRING);
+	$items = array_merge($items, $paths);
+}
+if (defined('QB_MAXITEMS')) { // If pagination is in use.
+	// How many pages are there?
+	$meta['numpages'] = floor(count($items) / QB_MAXITEMS)
+	// If there's more than one page, set "pages".
+	if ($meta['numpages'] > 1) {
+		$meta['pages'] = $meta['numpages'];
+	}
+	// What page is this?
+	$meta['thispage'] = $page;
+	// If not everything should be output:
+	if ($page != -1) {
+		// Is there a next page?
+		if ($page < $meta['numpages']) {
+			$meta['nextpage'] = $page + 1;
+		}
+		// Is there a previous page?
+		if ($page > 1) {
+			$meta['prevpage'] = $page - 1;
+		}
+		// Extract only those values that match the requested page.
+		$items = array_slice($items, ($page - 1) * QB_MAXITEMS, QB_MAXITEMS);
+	}
+}
+
+// If there has been at least one file selected:
+if (count($items) > 0) {
 	// $content will be the content the page template sees.
 	$content = '';
 	// $lastmtime will contain the latest mtime. Ya Rly.
 	$lastmtime = 0;
-	foreach ($matches as $ctime=>$paths) {
-		// Iterate through the first dimension, $ctime is the creation time,
-		// $paths an array of matches, which will be...
-		foreach ($paths as $match) {
-			// ...iterated as well. Add a single article to $content.
-			$content .= qb_buildpage($match, $template);
-			// Set $mtime to the file's mtime.
-			$mtime = filemtime(QB_SRC.$match.QB_SUF_SRC);
-			// Update $lastmtime, if necessary.
-			if ($mtime > $lastmtime)
-				$lastmtime = $mtime;
-		}
+	foreach ($items as $match) {
+		// Add a single article to $content.
+		$content .= qb_buildpage($match, $template);
+		// Set $mtime to the file's mtime.
+		$mtime = filemtime(QB_SRC.$match.QB_SUF_SRC);
+		// Update $lastmtime, if necessary.
+		if ($mtime > $lastmtime)
+			$lastmtime = $mtime;
 	}
 	// Throw out a Content-type and charset.
 	header('Content-type: '.$mime[$template].'; charset=UTF-8');
@@ -104,6 +134,8 @@ if (count($matches) > 0) {
 	$meta['content'] = $content;
 	if ($lastmtime != 0)
 		$meta['modified'] = $lastmtime;
+	// Set base path for query string fun (pagination and stuff).
+	$meta['basepath'] = QB_URLBASE . $url;
 	// Throw out the final page and be done. U can has cheezburger now.
 	echo(qb_template(QB_TPL_PAGE.'.'.$template, $meta));
 }

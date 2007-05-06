@@ -30,7 +30,11 @@ define('QB_META', 'meta/');
 define('QB_SUF_CRE', '.cre');
 // Suffix for article source files.
 define('QB_SUF_SRC', '.qb');
-// Maximum number of articles on one page.
-define('QB_MAXITEMS', 15);
+// Maximum number of articles on one page. If you don't want to use the "pages"
+// feature, comment this out.
+define('QB_MAXITEMS', 17);
+// Since you can't use pages together with non-default templates, should non-
+// default templates display only the first page (true) or everything (false)?
+define('QB_SHORTEN_FEEDS', true);
 
 ?>
