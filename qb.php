@@ -162,8 +162,7 @@ function qb_buildpage($path, $template = 'html') {
 		// "modified" is the modification date of the file.
 		$meta['modified'] = filemtime($filename);
 		// "created" is the date the file was created.
-		// FIXME: Use qb_created() instead?
-		$meta['created'] = filemtime(QB_META.$path.QB_SUF_CRE);
+		$meta['created'] = qb_created($path);
 		// If the two timestamps differ, set "wasmodified".
 		if ($meta['created'] != $meta['modified'])
 			$meta['wasmodified'] = $meta['modified'];
