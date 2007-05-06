@@ -264,10 +264,10 @@ function qb_template($template, $data) {
 		// Add a regex that will replace a template tag with the value.
 		$regex['|<qb:' . $nk . ' */ *>|U'] = $v;
 		// Create regexes for the corresponding <qb:ifset:...> tags.
-		$regex['|<qb:ifset:' . $nk . ' *>(.*)</qb:ifset:' . $nk .' *>|Us'] = '$1';
+		$regex['|<qb:ifset:(' . $nk . ') *>(.*)</qb:ifset:\\1 *>|Us'] = '$2';
 	}
 	// Create a regex that will eat all other <qb:ifset:...> tags.
-	$regex['|<qb:ifset:[a-z0-9]+ *>.*</qb:ifset:[a-z0-9]+ *>|Us'] = '';
+	$regex['|<qb:ifset:([a-z0-9]+) *>.*</qb:ifset:\\1 *>|Us'] = '';
 	// Create a regex for the date magic.
 	$regex['|<qb:date>([0-9]+) *([^<>]+)</qb:date>|me'] = "date('\$2', \$1)";
 	// Merge the generated and the configured regexes. Configured ones overwrite
