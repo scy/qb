@@ -71,6 +71,9 @@ if (count($requri) > 1) {
 	if (array_key_exists($qs, $mime)) {
 		// It's a template name, so choose this as the template.
 		$template = $qs;
+	} elseif ((is_int($qs)) && ($qs > 0)) {
+		// If it's a positive integer, use it as page number.
+		$page = (int)$qs;
 	}
 }
 
