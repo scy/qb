@@ -71,6 +71,12 @@ div.tags, div.via, div.date {
 	text-align:right;
 }
 
+div.pagenav {
+	font-size:90%;
+	color:#444;
+	text-align:center;
+}
+
 em em {
 	font-weight:bold;
 }

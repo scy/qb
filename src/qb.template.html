@@ -19,6 +19,11 @@
 <div id='content'>
 <qb:content/>
 </div>
+<qb:ifset:pages><div class='pagenav'>
+	Seite <qb:thispage/> von <qb:numpages/>&nbsp;&mdash;
+	<qb:ifset:prevpage><a href='<qb:basepath/>?<qb:prevpage/>'></qb:ifset:prevpage>neuere Einträge<qb:ifset:prevpage></a></qb:ifset:prevpage>&nbsp;&ndash;
+	<qb:ifset:nextpage><a href='<qb:basepath/>?<qb:nextpage/>'></qb:ifset:nextpage>ältere Einträge<qb:ifset:nextpage></a></qb:ifset:nextpage>
+</div></qb:ifset:pages>
 </body>
 
 </html>

@@ -75,7 +75,7 @@ if (count($requri) > 1) {
 		$template = $qs;
 		// If feeds should be shortened, set $page to 1, else to -1.
 		$page = (QB_SHORTEN_FEEDS) ? (1) : (-1);
-	} elseif ((is_int($qs)) && ($qs > 0)) {
+	} elseif ((is_numeric($qs)) && ($qs > 0)) {
 		// If it's a positive integer, use it as page number.
 		$page = (int)$qs;
 	}
@@ -91,7 +91,7 @@ foreach ($matches as $paths) {
 }
 if (defined('QB_MAXITEMS')) { // If pagination is in use.
 	// How many pages are there?
-	$meta['numpages'] = floor(count($items) / QB_MAXITEMS);
+	$meta['numpages'] = floor(count($items) / QB_MAXITEMS) + 1;
 	// If there's more than one page, set "pages".
 	if ($meta['numpages'] > 1) {
 		$meta['pages'] = $meta['numpages'];
