@@ -36,5 +36,7 @@ define('QB_MAXITEMS', 17);
 // Since you can't use pages together with non-default templates, should non-
 // default templates display only the first page (true) or everything (false)?
 define('QB_SHORTEN_FEEDS', true);
+// What to send as 404 message. You can't use qb markup here, only normal HTML.
+define('QB_FOUROHFOUR', '<p class=\'error\'>No such article.</p>');
 
 ?>

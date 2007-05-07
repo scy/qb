@@ -128,17 +128,24 @@ if (count($items) > 0) {
 		if ($mtime > $lastmtime)
 			$lastmtime = $mtime;
 	}
-	// Throw out a Content-type and charset.
-	header('Content-type: '.$mime[$template].'; charset=UTF-8');
 	// Set template variables "content" and "modified".
 	$meta['content'] = $content;
 	if ($lastmtime != 0)
 		$meta['modified'] = $lastmtime;
-	// Set base path for query string fun (pagination and stuff).
-	$meta['basepath'] = QB_URLBASE . $url;
-	// Throw out the final page and be done. U can has cheezburger now.
-	echo(qb_template(QB_TPL_PAGE.'.'.$template, $meta));
+} else {
+	// Show an error instead of simply sending zero bytes (which confuses some
+	// browsers).
+	$meta['content'] = QB_FOUROHFOUR;
+	$meta['modified'] = time();
+	header('HTTP/1.0 404 Not Found');
 }
+
+// Set base path for query string fun (pagination and stuff).
+$meta['basepath'] = QB_URLBASE . $url;
+// Throw out a Content-type and charset.
+header('Content-type: '.$mime[$template].'; charset=UTF-8');
+// And now the final page. U can has cheezburger now.
+echo(qb_template(QB_TPL_PAGE.'.'.$template, $meta));
 
 // Generate an article from an input file (supplied without prefix or suffix).
 // $template can be set to the template to use, defaults to "html".
