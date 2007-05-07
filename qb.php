@@ -243,7 +243,7 @@ function qb_created($path) {
 // Runs a bunch of patterns (regex=>replacement array) over a string.
 function qb_runpattern($pattern, $string) {
 	foreach ($pattern as $k => $v) {
-		if (count($v) == 1) {
+		if (!is_array($v)) {
 			// This is to catch the "tags" variable, iirc...
 			$string = preg_replace($k, $v, $string);
 		}
