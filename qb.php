@@ -187,7 +187,9 @@ function qb_buildpage($path, $template = 'html') {
 					// If there are any tags left, create a "spantags" template
 					// variable and put them in it. The "tags" variable stays
 					// an array. No idea what's the use in it, but whatever.
-					$meta['spantags'] = '<ul class=\'tag\'><li>' . implode("</li>\n<li>", $v) . '</li></ul>';
+					$meta['spantags'] = '<span class=\'tag\'>' . implode("</span> <span class=\'tag\'>", $v) . '</span>';
+					// Create a funky "ultags" for people who prefer that.
+					$meta['ultags'] = '<ul class=\'tag\'><li>' . implode("</li>\n<li>", $v) . '</li></ul>';
 				}
 			}
 			// Create a template variable with that value.
