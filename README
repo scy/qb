@@ -1,13 +1,82 @@
-This is qb's svn version.
+qb :: quick blogging
+====================
 
-qb is a small and hacky blog system, so expect the source code to be hacky and
-the documentation to be small.
+qb is a blog system for users who:
+ - don't want to install a database server for blogging every two months
+ - prefer performance over object-oriented plugin-based portal code
+ - like to be able to send entries via SCP
 
-The current code and configuration files are those of scytale.de. That means two
-things: First, you'll want to change it. Second, you'll have some nice examples.
+The default configuration files are those of scytale.de. That means two things:
+First, you'll want to change it. Second, you'll have some nice examples.
 
-Questions please to scy-dev-qb@scytale.de.
+Questions please to scy-dev-qb@scytale.de or contact me via IRC, I'm Scytale
+at freenode and usually hang out in #c3ma.
 
-I'm not quite sure whether qb will be developed further, because I'm already
-planning a new system. It's called "Kallisti" and can be found at
-<https://globalgeeks.org/svn/repos/kallisti>.
+
+SYSTEM REQUIREMENTS
+===================
+
+ - PHP 5
+ - Apache Web Server (others not tested)
+ - Unix-based OS (others not tested)
+
+Please contact me if you managed to run qb on something "not tested".
+
+
+INSTALLATION
+============
+
+Copy all files into a directory in the Document Root of your webserver. You can
+use a subdirectory or the top directory. You may want to move the "htaccess"
+file to ".htaccess" or create a symlink to it.
+
+Copy qb.distcfg.php to qb.cfg.php and edit it according to your needs.
+
+You may wish to create your own templates (find them in src/) and CSS. The
+templates to use are linked in qb.cfg.php, the CSS in the template.
+
+Make sure your web server can write to the QB_META directory.
+
+Start putting files with your configured suffix (default: .qb) into the "src"
+directory.
+
+
+CONTENT FILE SYNTAX
+===================
+
+Each content file consists of a header (the first line) and a body (everything
+else). The header consists of several tags formatted like "<NAME:VALUE>", where
+NAME will be the name of a template variable and VALUE its value.
+
+There are some special things: If you don't supply a NAME, it's the same as
+setting it to "title", therefore you can supply the entry's title like
+<:My cool entry> or <title:My cool entry>, it's equivalent.
+
+Then there's the <tags:> tag where you can supply some tags for the entry.
+Those are available in the template via "spantags" and "ultags", depending on
+whether you like <span class="tag"> or <ul class="tags"><li>... more. Soon one
+will be able to search for certain tags as well. Specify the tags as in Flickr,
+ie. seperate them with spaces and put double quotes around multi-word tags:
+<tags:example documentation boring "all your tags are belong to us" omg>
+
+Last but not least there's the <via:> tag where you can place a link to another
+blog to cite as source: <via:<<http://example.com/blog/23-foo.html ExBlog>>>
+(See below for the default "link" syntax.) You can also put unlinked text in it:
+<via:Fefe's Blog>. There'll probably be a trackback function soon.
+
+You can add other tags if you want to, their values will be available in the
+templates like any other ones.
+
+The body contains HTML code plus some regex shortcuts. With the default config
+you can write things like <<http://example.com/link Description>> which will
+then translate to <a href="http://example.com/link">Description</a>. There's
+other stuff like <wXX:Lemma_with_underscores Description> which will link to
+http://XX.wikipedia.org/Lemma_with_underscores.
+
+
+URL SCHEMA
+==========
+
+Suppose you've installed qb in a subdirectory called "qb" on your web server
+scytale.de and you've activated the supplied .htaccess file. Now every request
+that starts with http://scytale.de/qb/ will be handled by qb.
