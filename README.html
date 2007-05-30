@@ -1,3 +1,4 @@
+<!-- This is invalid HTML, intentionally. -->
 <h1>qb &mdash; quick blogging</h1>
 <p>qb is a blog system for users who:</p>
 <ul>
@@ -26,6 +27,16 @@
 	Please contact me if you managed to run qb on something "not tested".
 </p>
 
+<h2>Getting qb</h2>
+<p>
+	qb's official web site is at <a href="http://scytale.de/proj/qb/">http://scytale.de/proj/qb/</a>.
+	There are several possibilities available to get the code:
+</p>
+<ul>
+	<li>Using the <a href="http://git.or.cz/">Git</a> version control system. You can either use HTTP at <a href="http://scytale.de/git/qb.git/">http://scytale.de/git/qb.git/</a> or Git's own protocol at <a href="git://scytale.de/qb">git://scytale.de/qb</a> to check out the source code (<kbd class="shell">git clone git://scytale.de/qb</kbd>).</li>
+	<li>Tarballs will be available from version 0.3 on.</li>
+</ul>
+
 <h2>Installation</h2>
 <p>
 	Copy all files into a directory in the Document Root of your webserver.
@@ -33,7 +44,7 @@
 	You may want to move the <var class="file">htaccess</var> file to <var class="file">.htaccess</var> or create a symlink to it.
 </p>
 <p>
-	Copy <var class="file">qb.distcfg.php</var> to <var class="file">qb.cfg.php</var> and edit it according to your needs.
+	Copy <var class="file">dist.qb.cfg.php</var> to <var class="file">qb.cfg.php</var> and edit it according to your needs.
 </p>
 <p>
 	You may wish to create your own templates (find them in <var class="dir">src/</var>) and CSS.
