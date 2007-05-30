@@ -181,6 +181,8 @@ function qb_buildpage($path, $template = 'html') {
 				// using quotation marks. Should resemble Flickrs tag parsing
 				// logic somehow.
 				preg_match_all('%"(?! )([^"]+)(?<! )"|([^ ]+)%', $v, $tags, PREG_PATTERN_ORDER);
+				// Initialize $parsedtags.
+				$parsedtags = array();
 				foreach ($tags[0] as $tag) {
 					// Remove quotation marks and spaces.
 					$tag = str_replace('"', '', trim($tag));
