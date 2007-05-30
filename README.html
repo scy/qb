@@ -1,0 +1,150 @@
+<h1>qb &mdash; quick blogging</h1>
+<p>qb is a blog system for users who:</p>
+<ul>
+	<li>don't want to install a database server for blogging every two months</li>
+	<li>prefer performance over object-oriented plugin-based portal code</li>
+	<li>like to be able to send entries via SCP</li>
+</ul>
+<p>
+	The default configuration files are those of scytale.de.
+	That means two things:
+	First, you'll want to change it.
+	Second, you'll have some nice examples.
+</p>
+<p>
+	Questions please to <a href="mailto:scy-proj-qb@scytale.de">scy-proj-qb@scytale.de</a> or contact me via IRC, I'm Scytale at <a href="http://freenode.net/">freenode</a> and usually hang out in <a href="irc://chat.freenode.net/c3ma">#c3ma</a>.
+	Another possibility is to talk to me via Jabber: <a href="xmpp:scy@scytale.de">scy@scytale.de</a>.
+</p>
+
+<h2>System Requirements</h2>
+<ul>
+	<li><a href="http://php.net/">PHP 5</a></li>
+	<li><a href="http://httpd.apache.org/">Apache Web Server</a> (others not tested)</li>
+	<li>Unix-based OS (others not tested)</li>
+</ul>
+<p>
+	Please contact me if you managed to run qb on something "not tested".
+</p>
+
+<h2>Installation</h2>
+<p>
+	Copy all files into a directory in the Document Root of your webserver.
+	You can use a subdirectory or the top directory.
+	You may want to move the <var class="file">htaccess</var> file to <var class="file">.htaccess</var> or create a symlink to it.
+</p>
+<p>
+	Copy <var class="file">qb.distcfg.php</var> to <var class="file">qb.cfg.php</var> and edit it according to your needs.
+</p>
+<p>
+	You may wish to create your own templates (find them in <var class="dir">src/</var>) and CSS.
+	The templates to use are linked in <var class="file">qb.cfg.php</var>, the CSS in the template.
+</p>
+<p>
+	Make sure your web server can write to the <var class="const">QB_META</var> directory.
+</p>
+<p>
+	Start putting files with your configured suffix (default: <var class="filesuf">.qb</var>) into the <var class="dir">src</var> directory.
+</p>
+
+<h2>Content File Syntax</h2>
+<p>
+	Each content file consists of a header (the first line) and a body (everything else).
+	The header consists of several tags formatted like <code>&lt;NAME:VALUE&gt;</code>, where <var>NAME</var> will be the name of a template variable and <var>VALUE</var> its value.
+</p>
+<p>
+	There are some special things:
+	If you don't supply a <var>NAME</var>, it's the same as setting it to "title", therefore you can supply the entry's title like <code>&lt;:My cool entry&gt;</code> or <code>&lt;title:My cool entry&gt;</code>, it's equivalent.
+</p>
+<p>
+	Then there's the <code>&lt;tags:&gt;</code> tag where you can supply some tags for the entry.
+	Those are available in the template via <var>spantags</var> and <var>ultags</var>, depending on whether you like <code class="html">&lt;span class="tag"&gt;</code> or <code class="html">&lt;ul class="tags"&gt;&lt;li&gt;...</code> more.
+	Soon one will be able to search for certain tags as well.
+	Specify the tags as in <a href="http://www.flickr.com/">Flickr</a>, i.e. seperate them with spaces and put double quotes around multi-word tags:
+</p>
+<pre><code>&lt;tags:example documentation boring "all your tags are belong to us" omg&gt;</code></pre>
+<p>
+	Last but not least there's the <code>&lt;via:&gt;</code> tag where you can place a link to another blog to cite as source:
+</p>
+<pre><code>&lt;via:&lt;&lt;http://example.com/blog/23-foo.html ExBlog&gt;&gt;&gt;</code></pre>
+<p>
+	(See below for the default "link" syntax.)
+	You can also put unlinked text in it:
+</p>
+<pre><code>&lt;via:Fefe's Blog&gt;</code></pre>
+<p>
+	There'll probably be a trackback function soon.
+</p>
+<p>
+	You can add other tags if you want to, their values will be available in the templates like any other ones.
+</p>
+<p>
+	The body contains HTML code plus some regex shortcuts.
+	With the default config you can write things like
+</p>
+<pre><code>&lt;&lt;http://example.com/link Description&gt;&gt;</code></pre>
+<p>
+	which will then translate to
+</p>
+<pre><code class="html">&lt;a href="http://example.com/link"&gt;Description&lt;/a&gt;</code></pre>
+<p>
+	There's other stuff like <code>&lt;wXX:Lemma_with_underscores Description&gt;</code> which will link to <var class="url">http://XX.wikipedia.org/Lemma_with_underscores</var>.
+</p>
+
+<h2>URL Schema</h2>
+<p>
+	Suppose you've installed qb in a subdirectory called <var class="dir">qb</var> on your web server <var class="host">scytale.de</var> and you've activated the supplied <var class="file">.htaccess</var> file.
+	Now every request that starts with <var class="url">http://scytale.de/qb/</var> will be handled by qb.
+</p>
+<p>
+	qb will map the path on the web server to its "source" directory (by default <var class="dir">src</var>).
+	That means, if someone sends a request to <var class="url">http://scytale.de/qb/foo</var>, qb will search first for a directory <var class=dir">src/foo</var>.
+	If it exists, it will display all <var class="filesuf">.qb</var> files in that directory and its subdirectories, ordered by their creation date, newest first.
+	This allows you to organize your files in a flexible way.
+	For example, you can throw all your blog entries directly in the source directory (creative chaos), put them under different directories depending on the content (like <var class="dir">coding</var>, <var class="dir">politics</var> etc.) or in date-based directories (like <var class="dir">2007/05/30</var>).
+	In the last example, someone requesting <var class="url">http://scytale.de/qb/2007</var> will see all your entries in the <var class="dir">2007</var> directory and its subdirectories.
+</p>
+<p>
+	If there's no directory with that name, qb will look for a <var class="filesuf">.qb</var> file matching.
+	For example, the request <var class="url">http://scytale.de/qb/foo</var> will look for <var class="file">src/foo.qb</var>.
+	If that doesn't exist also, an "not found" error message will be sent.
+</p>
+<p>
+	There are two other special things that may be passed as "query" part of the URL, i.e. after a question mark.
+	First, you can pass a template name.
+	This is how the <a href="http://www.atomenabled.org/">Atom feed</a> works: You pass <var class="url">http://scytale.de/qb/?atom10</var> in the URL, and qb will use the <var class="file">qb.article.atom10</var> and <var class="file">qb.template.atom10</var> template files in its source directory, which will output a valid Atom feed instead of HTML data.
+</p>
+<p>
+	Second, if the query part is a positive integer, it will be interpreted as page number.
+	<var class="url">http://scytale.de/qb/?3</var> will therefore refer to page three of the articles.
+	Page numbers are used if the number of articles that would match a certain request is larger than the maximum number of articles per page set in the config file.
+</p>
+
+<h2>Meta Information</h2>
+<p>
+	Since most current Unix systems do not store file creation times (only the modification time), qb uses a dirty workaround that can be seen in the <var class="dir">meta</var> directory of a qb installation.
+	In this directory there are <var class="filesuf">.cre</var> files stored for each <var class="filesuf">.qb</var> file in the source directory.
+	Their modification time is used as creation time of the source files.
+	That means that for each <var class="filesuf">.qb</var> file displayed, qb will check whether its <var class="filesuf">.cre</var> file exists.
+	If it doesn't, it is created and its modification time set to that of the <var class="filesuf">.qb</var> file.
+	This timestamp is never changed, in contrast to that of the <var class="filesuf">.qb</var> file when you change it.
+</p>
+<p>
+	The meta directory needs to be writable by the web server for obvious reasons (on a side note, the source directory needs not).
+	It will contain the same subdirectories as the source directory.
+	If you delete or move around files in the source directory, orphaned files will not be automatically deleted or moved to the new location.
+</p>
+
+<h2>Backing Up and Moving a qb Installation</h2>
+<p>
+	Since qb is only using plain text files, it's easy to create a backup.
+	You don't have to create database dumps and all that.
+	The only thing you'll have to take care for is to keep the correct time stamps.
+</p>
+<p>
+	If you would like to move a qb installation to a different directory or web server, here are some common pitfalls:
+</p>
+<ul>
+	<li>Make sure the modification timestamps of your files in the source and meta directory will not be changed. Else you'll lose the timestamp information, and article order will be seriously screwed up.</li>
+	<li>Check the permissions of your meta directory. The web server needs to be able to create new files and directories there.</li>
+	<li>Don't forget the .htaccess file and to check your config file whether they are up to date.</li>
+</ul>
