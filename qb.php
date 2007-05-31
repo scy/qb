@@ -142,6 +142,8 @@ if (count($items) > 0) {
 
 // Set base path for query string fun (pagination and stuff).
 $meta['basepath'] = QB_URLBASE . $url;
+// "urlbase" contains exactly the value of QB_URLBASE.
+$meta['urlbase'] = QB_URLBASE;
 // Throw out a Content-type and charset.
 header('Content-type: '.$mime[$template].'; charset=UTF-8');
 // And now the final page. U can has cheezburger now.
@@ -196,7 +198,7 @@ function qb_buildpage($path, $template = 'html') {
 					// If there are any tags left, create a "spantags" template
 					// variable and put them in it. The "tags" variable stays
 					// an array. No idea what's the use in it, but whatever.
-					$meta['spantags'] = '<span class=\'tag\'>' . implode("</span> <span class=\'tag\'>", $v) . '</span>';
+					$meta['spantags'] = '<span class=\'tag\'>' . implode('</span> <span class=\'tag\'>', $v) . '</span>';
 					// Create a funky "ultags" for people who prefer that.
 					$meta['ultags'] = '<ul class=\'tag\'><li>' . implode("</li>\n<li>", $v) . '</li></ul>';
 				}
