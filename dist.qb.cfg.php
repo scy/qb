@@ -2,7 +2,7 @@
 
 // The base part for URLs. Should start with a slash, end with a slash and
 // contain the directory in your Document Root where qb is installed.
-define('QB_URLBASE', '/qb/');
+define('QB_URLBASE', '/blog/');
 
 // Regexes that are run over each article. See PHP's preg_match() documentation.
 $qb_regex = array(
