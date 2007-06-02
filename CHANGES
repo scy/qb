@@ -1,0 +1,21 @@
+CHANGES for qb :: http://scytale.de/proj/qb/
+
+Version 0.2.2 (2007-05-06):
+ - bugfix for 0.2.1: If the number of items was exactly divisible by
+   QB_MAXITEMS, qb would calculate the page number as one too much, leaving you
+   with an empty last page.
+
+Version 0.2.1 (2007-05-06):
+ - bugfix for 0.2: <qb:ifset> was not working like it should when nesting
+   multiple ifsets that evaluated to false. This would for example seriously
+   break the sample template when less than QB_MAXITEMS were in the blog. Fixed
+   by using back references in two regexes now.
+
+Version 0.2 (2007-05-06):
+ - new: Split the output into multiple pages. The desired page number can be
+   chosen by putting a positive integer into the "query" part of the URL ("?5").
+ - commented the whole code and configuration file, but not the templates
+ - removed unneeded code parts from pre-0.1
+
+Version 0.1 (2007-03-22):
+ - initial release of that what seems to work on scytale.de to the public
