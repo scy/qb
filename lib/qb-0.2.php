@@ -1,7 +1,7 @@
 <?php
 
 // Include configuration file.
-require_once('qb.cfg.php');
+require_once('qb-0.2.conf.php');
 
 // Define MIME types for the different templates.
 $mime = array(

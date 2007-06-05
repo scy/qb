@@ -41,14 +41,19 @@
 </p>
 
 <h2>Installation</h2>
+<p class="warning">
+	<strong>Warning:</strong>
+	This documentation is updated while qb's development goes on.
+	If you are reading <a href="http://scytale.de/proj/qb/">this file online</a>, keep in mind that the information herein describes qb's current "bleeding edge" Git version.
+	If you did not check out the qb version you would like to install from the Git repository, please refer to the README.html in your tarball instead.
+</p>
 <p>
 	Copy all files into a directory in the Document Root of your webserver.
 	You can use a subdirectory or the top directory.
 	You may want to move the <var class="file">htaccess</var> file to <var class="file">.htaccess</var> or create a symlink to it.
 </p>
 <p>
-	Copy <var class="file">dist.qb.cfg.php</var> to <var class="file">qb.cfg.php</var> and edit it according to your needs.
-	<em>(If you're using version 0.2.2 or older, the file already has its correct name.)</em>
+	Inside the <var class="dir">lib</var> directory, copy <var class="file">qb-0.2.conf.dist.php</var> to <var class="file">qb-0.2.conf.php</var> and edit it according to your needs.
 </p>
 <p>
 	You may wish to create your own templates (find them in <var class="dir">src/</var>) and CSS.
