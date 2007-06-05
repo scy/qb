@@ -1,6 +1,6 @@
 v0.3:  - Put qb under the GPL.
        - Tidy up:
-         - Move everything out of src/ because only articles should be there.
+         + Move everything out of src/ because only articles should be there.
          + Move the (default) configuration file into lib/.
          - Split qb into several object-oriented modules.
        - Think of a new, future safe URL schema.

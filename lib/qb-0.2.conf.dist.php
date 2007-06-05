@@ -16,9 +16,9 @@ $qb_regex = array(
 );
 
 // File name prefix for full-page templates.
-define('QB_TPL_PAGE', 'src/qb.template');
+define('QB_TPL_PAGE', 'lib/tpl/fullpage');
 // File name prefix for single-article templates.
-define('QB_TPL_ARTICLE', 'src/qb.article');
+define('QB_TPL_ARTICLE', 'lib/tpl/article');
 // Set to true to remove every dot and colon from the supplied request as a
 // security measure.
 define('QB_NODOT', true);
