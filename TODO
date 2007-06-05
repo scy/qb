@@ -1,1 +1,20 @@
--Trackback-URLs (Auswertung ist optional, das kann man auch von Hand)
+v0.3:  - Put qb under the GPL.
+       - Tidy up:
+         - Move everything out of src/ because only articles should be there.
+         - Move the (default) configuration file into lib/.
+         - Split qb into several object-oriented modules.
+       - Think of a new, future safe URL schema.
+         - Modify htaccess to keep old links working.
+       - Make it possible to use different themes without editing qb.php.
+       - Store creation timestamps _in_ the .cre files as well in order to allow
+         reconstruction of lost timestamps.
+         - Write a contrib script to recover them.
+       - Introduce a configurable tolerance timespan to keep qb from showing
+         articles as "updated" if they have been changed seconds after creation.
+
+v0.4:  - Modules galore:
+         - Comments.
+         - Trackbacks (receiving and sending).
+         - Pingbacks (receiving and sending).
+         - Pings to popular blog directories.
+         - Search tracker and referrer tracker.
