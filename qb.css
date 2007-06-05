@@ -90,7 +90,7 @@ span.label {
 	font-weight:bold;
 }
 
-pre.shell, code.sh {
+pre.shell, pre.sh, code.sh {
 	background-color:#000;
 	color:#aaa;
 }
@@ -98,4 +98,5 @@ pre.shell, code.sh {
 pre {
 	padding:0.5em;
 	margin-left:1.5em;
+	overflow:auto;
 }
