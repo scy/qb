@@ -90,9 +90,12 @@ span.label {
 	font-weight:bold;
 }
 
-pre.shell {
+pre.shell, code.sh {
 	background-color:#000;
 	color:#aaa;
+}
+
+pre {
 	padding:0.5em;
 	margin-left:1.5em;
 }
