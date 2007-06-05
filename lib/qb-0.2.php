@@ -240,8 +240,10 @@ function qb_created($path) {
 		// Create the directory for the $cfile (recursively), if needed.
 		if (!file_exists(dirname($cfile)))
 			mkdir(dirname($cfile), 0775, true);
-		// Create the $cfile and set its modification date, which serves as the
-		// creation date from now on.
+		// Create the $cfile and put the timestamp inside as a backup.
+		file_put_contents($cfile, $ctime);
+		// Finally set its modification date, which serves as the creation date
+		// from now on.
 		touch($cfile, $ctime);
 		// Return the time we set.
 		return ($ctime);
