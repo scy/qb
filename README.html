@@ -1,20 +1,20 @@
 <!-- This is invalid HTML, intentionally. -->
 <h1>qb &mdash; quick blogging</h1>
-<p>qb is a blog system by <a href="http://scytale.de/">Tim 'Scytale' Weber</a> for people who:</p>
+<p>qb is a blog system by <a href="http://scytale.name/">Tim 'Scytale' Weber</a> for people who:</p>
 <ul>
 	<li>don't want to install a database server for blogging every two months</li>
 	<li>prefer performant code</li>
 	<li>like to be able to send entries via SCP, cronjobs or other obscure methods</li>
 </ul>
 <p>
-	The default configuration files are those of scytale.de.
+	The default configuration files are those of scytale.name.
 	That means two things:
 	First, you'll want to change it.
 	Second, you'll have some nice examples.
 </p>
 <p>
-	Questions please to <a href="mailto:scy-proj-qb@scytale.de">scy-proj-qb@scytale.de</a> or contact me via IRC, I'm Scytale at <a href="http://freenode.net/">freenode</a> and usually hang out in <a href="irc://chat.freenode.net/c3ma">#c3ma</a>.
-	Another possibility is to talk to me via Jabber: <a href="xmpp:scy@scytale.de">scy@scytale.de</a>.
+	Questions please to <a href="mailto:scy-proj-qb@scytale.name">scy-proj-qb@scytale.name</a> or contact me via IRC, I'm Scytale at <a href="http://freenode.net/">freenode</a> and usually hang out in <a href="irc://chat.freenode.net/c3ma">#c3ma</a>.
+	Another possibility is to talk to me via Jabber: <a href="xmpp:scy@scytale.name">scy@scytale.name</a>.
 </p>
 
 <h2>System Requirements</h2>
@@ -29,12 +29,12 @@
 
 <h2>Getting qb</h2>
 <p>
-	qb's official web site is at <a href="http://scytale.de/proj/qb/">http://scytale.de/proj/qb/</a>.
+	qb's official web site is at <a href="http://scytale.name/proj/qb/">http://scytale.name/proj/qb/</a>.
 	There are several possibilities available to get the code:
 </p>
 <ul>
-	<li>Tarballs are available at <a href="http://scytale.de/proj/qb/dist/">http://scytale.de/proj/qb/dist/</a>. There's a <strong><a href="http://scytale.de/proj/qb/dist/qb-current.tar.gz">direct link to the latest stable qb version</a></strong>.</li>
-	<li>Bleeding edge development is available through the <a href="http://git.or.cz/">Git</a> version control system. You can either use Git's own protocol at <a href="git://scytale.de/qb">git://scytale.de/qb</a> or HTTP at <a href="http://scytale.de/git/qb.git/">http://scytale.de/git/qb.git/</a> to check out the source code (<kbd class="shell">git clone git://scytale.de/qb</kbd>).</li>
+	<li>Tarballs are available at <a href="http://scytale.name/proj/qb/dist/">http://scytale.name/proj/qb/dist/</a>. There's a <strong><a href="http://scytale.name/proj/qb/dist/qb-current.tar.gz">direct link to the latest stable qb version</a></strong>.</li>
+	<li>Bleeding edge development is available through the <a href="http://git.or.cz/">Git</a> version control system. You can either use Git's own protocol at <a href="git://scytale.name/qb">git://scytale.name/qb</a> or HTTP at <a href="http://scytale.name/git/qb.git/">http://scytale.name/git/qb.git/</a> to check out the source code (<kbd class="shell">git clone git://scytale.name/qb</kbd>).</li>
 </ul>
 <p>
 	You can have a look at the <a href="CHANGES">changelog</a>.
@@ -44,7 +44,7 @@
 <p class="warning">
 	<strong>Warning:</strong>
 	This documentation is updated while qb's development goes on.
-	If you are reading <a href="http://scytale.de/proj/qb/">this file online</a>, keep in mind that the information herein describes qb's current "bleeding edge" Git version.
+	If you are reading <a href="http://scytale.name/proj/qb/">this file online</a>, keep in mind that the information herein describes qb's current "bleeding edge" Git version.
 	If you did not check out the qb version you would like to install from the Git repository, please refer to the README.html in your tarball instead.
 </p>
 <p>
@@ -112,30 +112,30 @@
 
 <h2>URL Schema</h2>
 <p>
-	Suppose you've installed qb in a subdirectory called <var class="dir">qb</var> on your web server <var class="host">scytale.de</var> and you've activated the supplied <var class="file">.htaccess</var> file.
-	Now every request that starts with <var class="url">http://scytale.de/qb/</var> will be handled by qb.
+	Suppose you've installed qb in a subdirectory called <var class="dir">qb</var> on your web server <var class="host">scytale.name</var> and you've activated the supplied <var class="file">.htaccess</var> file.
+	Now every request that starts with <var class="url">http://scytale.name/qb/</var> will be handled by qb.
 </p>
 <p>
 	qb will map the path on the web server to its "source" directory (by default <var class="dir">src</var>).
-	That means, if someone sends a request to <var class="url">http://scytale.de/qb/foo</var>, qb will search first for a directory <var class=dir">src/foo</var>.
+	That means, if someone sends a request to <var class="url">http://scytale.name/qb/foo</var>, qb will search first for a directory <var class=dir">src/foo</var>.
 	If it exists, it will display all <var class="filesuf">.qb</var> files in that directory and its subdirectories, ordered by their creation date, newest first.
 	This allows you to organize your files in a flexible way.
 	For example, you can throw all your blog entries directly in the source directory (creative chaos), put them under different directories depending on the content (like <var class="dir">coding</var>, <var class="dir">politics</var> etc.) or in date-based directories (like <var class="dir">2007/05/30</var>).
-	In the last example, someone requesting <var class="url">http://scytale.de/qb/2007</var> will see all your entries in the <var class="dir">2007</var> directory and its subdirectories.
+	In the last example, someone requesting <var class="url">http://scytale.name/qb/2007</var> will see all your entries in the <var class="dir">2007</var> directory and its subdirectories.
 </p>
 <p>
 	If there's no directory with that name, qb will look for a <var class="filesuf">.qb</var> file matching.
-	For example, the request <var class="url">http://scytale.de/qb/foo</var> will look for <var class="file">src/foo.qb</var>.
+	For example, the request <var class="url">http://scytale.name/qb/foo</var> will look for <var class="file">src/foo.qb</var>.
 	If that doesn't exist also, an "not found" error message will be sent.
 </p>
 <p>
 	There are two other special things that may be passed as "query" part of the URL, i.e. after a question mark.
 	First, you can pass a template name.
-	This is how the <a href="http://www.atomenabled.org/">Atom feed</a> works: You pass <var class="url">http://scytale.de/qb/?atom10</var> in the URL, and qb will use the <var class="file">qb.article.atom10</var> and <var class="file">qb.template.atom10</var> template files in its source directory, which will output a valid Atom feed instead of HTML data.
+	This is how the <a href="http://www.atomenabled.org/">Atom feed</a> works: You pass <var class="url">http://scytale.name/qb/?atom10</var> in the URL, and qb will use the <var class="file">qb.article.atom10</var> and <var class="file">qb.template.atom10</var> template files in its source directory, which will output a valid Atom feed instead of HTML data.
 </p>
 <p>
 	Second, if the query part is a positive integer, it will be interpreted as page number.
-	<var class="url">http://scytale.de/qb/?3</var> will therefore refer to page three of the articles.
+	<var class="url">http://scytale.name/qb/?3</var> will therefore refer to page three of the articles.
 	Page numbers are used if the number of articles that would match a certain request is larger than the maximum number of articles per page set in the config file.
 </p>
 
