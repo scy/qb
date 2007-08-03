@@ -257,7 +257,7 @@ function qb_created($path) {
 function qb_runpattern($pattern, $string) {
 	foreach ($pattern as $k => $v) {
 		if (!is_array($v)) {
-			// This is to catch the "tags" variable, iirc...
+			// This !is_array() is to catch the "tags" variable.
 			$string = preg_replace($k, $v, $string);
 		}
 	}
@@ -277,7 +277,8 @@ function qb_template($template, $data) {
 		// consist only of a-z0-9.
 		$nk = preg_replace('[^a-z0-9]', '', strtolower($k));
 		// Add a regex that will replace a template tag with the value.
-		$regex['|<qb:' . $nk . ' */ *>|U'] = $v;
+		$regex['|<qb:' . $nk . ' */ *>|U'] = str_replace(
+			array('\\', '$'), array('\\\\', '\\$'), $v);
 		// Create regexes for the corresponding <qb:ifset:...> tags.
 		$regex['|<qb:ifset:(' . $nk . ') *>(.*)</qb:ifset:\\1 *>|Us'] = '$2';
 	}
