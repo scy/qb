@@ -1,0 +1,4 @@
+Galdo has written a small PHP script for adding new entries via your browser.
+
+More information about it can be found at:
+http://wiki.galdo.de/doku.php?id=projekte:qb_webedit
