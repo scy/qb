@@ -8,5 +8,5 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ qb.php?$1 [L]
 
-RewriteRule ^(README\.html|TODO|CHANGES|htaccess|.gitignore|contrib(/.*)?)$ - [F]
+RewriteRule ^(.gitignore|README\.html|TODO|CHANGES|htaccess|(contrib|lib|tpl)(/.*)?)$ - [F]
 
