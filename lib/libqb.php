@@ -8,10 +8,4 @@ function __autoload($class) {
 	require_once("lib/$class/$class.php");
 }
 
-// Runs the 0.2 qb.
-function qb() {
-	// Right now, we still need the old stuff.
-	require('lib/qb-0.2.php');
-}
-
 ?>
