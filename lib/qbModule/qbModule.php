@@ -45,11 +45,26 @@ abstract class qbModule {
 
 	/**
 	 * Return a description of this module.
-	 * @todo This should really parse the PHPdoc tag of the class.
+	 *
+	 * If none has been explicitly set with {@link setModuleDescription()}, the
+	 * description from the doc block is used.
+	 *
 	 * @return string
 	 */
 	public function getModuleDescription() {
-		return ($this->moduleDescription);
+		// Allow the PHPdoc to be overridden.
+		if ($this->moduleDescription !== null)
+			return ($this->moduleDescription);
+		// Get the class docblock by using reflection.
+		$r = new ReflectionClass($this->getModuleName());
+		$block = $r->getDocComment();
+		// Remove leading "/**" and trailing "*/" as well as asterisks at the
+		// beginning of each line.
+		$block = trim(preg_replace('#(\\A\\s*/\\*{2,}\\s*|\\s*\\*+/\\s*\\Z|^\\s*\\*+[ \\t]*)#m', '', $block));
+		// Until the first period not in a word or a blank line.
+		$desc  = str_replace(array("\n", "\r"), ' ',
+			preg_replace('/\\A((?U).+)((\\.)(\\s|$)|(\\s*^\\s*$)).*/ms', '$1$3', $block));
+		return ($desc);
 	}
 
 	/**
@@ -82,7 +97,10 @@ abstract class qbModule {
 
 	/**
 	 * Set the description of this module.
-	 * @todo This information should be parsed from the PHPdoc.
+	 *
+	 * You need to use this only if you want to override the doc block
+	 * description for the class.
+	 *
 	 * @param string $desc A description.
 	 * @return string
 	 */
