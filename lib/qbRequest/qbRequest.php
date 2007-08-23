@@ -29,7 +29,7 @@ class qbRequest extends qbOfficialModule {
 	 * This is kind of a singleton, please use {@link getInstance()} instead.
 	 *
 	 * However, since {@link qbOfficialModule::__construct() qbOfficialModule's
-	 * constructor} is public, we can't set this one privat, so it will throw an
+	 * constructor} is public, we can't set this one private, so it will throw a
 	 * {@link qbSingletonException} if called directly.
 	 */
 	public function __construct() {
