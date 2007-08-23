@@ -17,28 +17,15 @@
    */
 
 /**
- * Class autoloader.
- *
- * @param string $class The class that's currently missing.
- * @return bool True if the class could be loaded. Else execution stops anyway.
+ * Base class for qb exceptions.
  */
-function __autoload($class) {
-	// Remove suspicious characters.
-	$class = preg_replace('/[^a-zA-Z0-9]/', '', $class);
-	// Include the class, die if that fails.
-	require_once("lib/$class/$class.php");
-}
+
+class qbException extends Exception { }
 
 /**
- * Starts qb as it is right now, used by Tim for testing purposes only.
- *
- * This will at some point become code in the new qb.php.
+ * Thrown by constructors for singleton classes.
  */
-function ohThree() {
-	// Load all the exceptions.
-	new qbException();
-	// Parse and delegate the request.
-	$r = qbRequest::getInstance();
-}
+
+class qbSingletonException extends qbException { }
 
 ?>
