@@ -23,6 +23,12 @@
 class qbException extends Exception { }
 
 /**
+ * Thrown if something is not yet implemented.
+ */
+
+class qbNotImplementedExecption extends qbException { }
+
+/**
  * Thrown by constructors for singleton classes.
  */
 

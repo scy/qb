@@ -25,6 +25,9 @@ class qbRequest extends qbOfficialModule {
 	private static $instance  = null;
 	private static $construct = false;
 
+	private $rootpath = null;
+	private $path     = null;
+
 	/**
 	 * This is kind of a singleton, please use {@link getInstance()} instead.
 	 *
@@ -33,8 +36,24 @@ class qbRequest extends qbOfficialModule {
 	 * {@link qbSingletonException} if called directly.
 	 */
 	public function __construct() {
+		// Throw an exception if not called via getInstance().
 		if (!self::$construct)
 			throw new qbSingletonException();
+		phpinfo();
+		// Set $rootpath to where we are apparently installed in.
+		$this->rootpath = dirname($_SERVER['SCRIPT_NAME']);
+		// If this doesn't end in a slash, make it so.
+		if (substr($this->rootpath, -1) !== '/')
+			$this->rootpath .= '/';
+		// Does the request URL start with the same string? If not, we're in a
+		// strange server setup. TODO: Build one and find out what to do.
+		if (!qbTools::sameStart($this->rootpath, $_SERVER['REQUEST_URI']))
+			throw new qbNotImplementedException(
+				'SCRIPT_NAME and REQUEST_URI do not start the same');
+		// Find out what we're actually supposed to display (ie. remove the root
+		// path and leading and trailing slashes from anything that's left.
+		$this->path = trim(substr($_SERVER['REQUEST_URI'], strlen($this->rootpath)), '/');
+		var_dump($this->path);
 	}
 
 	/**
