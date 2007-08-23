@@ -26,7 +26,6 @@
 abstract class qbOfficialModule extends qbModule {
 
 	public function __construct() {
-		parent::__construct();
 		$this->setModuleURL('http://scytale.name/proj/qb/');
 		$this->setModuleAuthor('Tim Weber <scy-proj-qb@scytale.name>');
 	}
