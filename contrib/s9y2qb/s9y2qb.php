@@ -76,7 +76,7 @@ while (true) {
 	$txt .= $r['body'] . "\n" . (($r['extended'])?($r['extended'] . "\n"):(''));
 	$fname = $r['id'] . $suf;
 	$mname = $r['id'] . $muf;
-	file_put_contents($fname, str_replace("\r", '', $txt)) or die("Could not write to '$fname'.\n");
+	file_put_contents($fname, $txt) or die("Could not write to '$fname'.\n");
 	touch($fname, (int)$r['modified']) or die("Could not change mod time of '$fname'.\n");
 	touch($mname, (int)$r['created']) or die("Could not change mod time of '$mname'.\n");
 	echo("done.\n");
