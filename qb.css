@@ -100,3 +100,7 @@ pre {
 	margin-left:1.5em;
 	overflow:auto;
 }
+
+a img {
+	border: none;
+}
