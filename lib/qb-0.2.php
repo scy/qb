@@ -155,10 +155,14 @@ if (count($items) > 0) {
 $meta['basepath'] = QB_URLBASE . $url;
 // "urlbase" contains exactly the value of QB_URLBASE.
 $meta['urlbase'] = QB_URLBASE;
-// Throw out a Content-type and charset.
-header('Content-type: '.$mime[$template].'; charset=UTF-8');
+// Throw out a Content-type and charset, if we still can.
+@header('Content-type: '.$mime[$template].'; charset=UTF-8');
 // And now the final page. U can has cheezburger now.
 echo(qb_template(QB_TPL_PAGE.'.'.$template, $meta));
+
+// Oh, one final thing: If QB_END_CALLBACK is defined, call it.
+if (defined('QB_END_CALLBACK'))
+	call_user_func(QB_END_CALLBACK);
 
 // Generate an article from an input file (supplied without prefix or suffix).
 // $template can be set to the template to use, defaults to "html".
