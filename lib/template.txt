@@ -16,18 +16,6 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
    */
 
-/**
- * Class autoloader.
- *
- * @param string $class The class that's currently missing.
- * @return bool True if the class could be loaded. Else execution stops anyway.
- */
-function __autoload($class) {
-	// Remove suspicious characters.
-	$class = preg_replace('/[^a-zA-Z0-9]/', '', $class);
-	// Include the class, die if that fails.
-	require_once("lib/$class.php");
-	return (true);
-}
+die("You forgot the code.\n");
 
 ?>
