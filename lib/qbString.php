@@ -28,11 +28,8 @@ class qbString {
 	 */
 	public static function sameStart($a, $b) {
 		// $a should be the shorter one. If it isn't, make it.
-		if (strlen($a) > strlen($b)) {
-			$tmp = $b;
-			$b = $a;
-			$a = $tmp;
-		}
+		if (strlen($a) > strlen($b))
+			list($a, $b) = array($b, $a);
 		return (substr($b, 0, strlen($a)) === $a);
 	}
 	
