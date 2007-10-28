@@ -32,14 +32,25 @@ function __autoload($class) {
 	return (true);
 }
 
+/**
+ * Define a constant, if it isn't already defined.
+ *
+ * @todo Sanity checks.
+ */
+function qb_define($name, $value) {
+	if (!defined($name))
+		define($name, $value);
+}
+
 // If there's no information where qb is installed, defaults to "here".
-if (!defined('QB_LIBDIR'))
-	define('QB_LIBDIR', realpath(dirname(__FILE__)));
+qb_define('QB_LIBDIR', realpath(dirname(__FILE__)));
 
 // Set the "request directory", ie. the cwd when the request occured.
 // This should be where the file that includes qb is located.
-if (!defined('QB_REQDIR'))
-	define('QB_REQDIR', realpath(getcwd()));
+qb_define('QB_REQDIR', realpath(getcwd()));
+
+// Store the path compontent of the requested URL.
+qb_define('QB_URIPATH', $_SERVER['REQUEST_URI']);
 
 
 
