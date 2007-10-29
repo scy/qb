@@ -49,6 +49,9 @@ qb_define('QB_LIBDIR', realpath(dirname(__FILE__)));
 // This should be where the file that includes qb is located.
 qb_define('QB_REQDIR', realpath(getcwd()));
 
+// Set the document root of the web server.
+qb_define('QB_DOCROOT', realpath($_SERVER['DOCUMENT_ROOT']));
+
 // Store the path compontent of the requested URL.
 qb_define('QB_URIPATH', $_SERVER['REQUEST_URI']);
 

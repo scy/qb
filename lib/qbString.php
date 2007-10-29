@@ -24,9 +24,9 @@
 class qbString {
 
 	/**
-	 * Return true if both strings start with the same characters.
+	 * Return true if string $b starts with string $a.
 	 */
-	public static function sameStart($a, $b) {
+	public static function startsWith($a, $b) {
 		// $a should be the shorter one. If it isn't, make it.
 		if (strlen($a) > strlen($b))
 			list($a, $b) = array($b, $a);
