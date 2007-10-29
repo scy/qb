@@ -24,7 +24,7 @@
  * @param string $class The class that's currently missing.
  * @return bool True if the class could be loaded. Else execution stops anyway.
  */
-function __autoload($class) {
+function qb_autoload($class) {
 	// Remove suspicious characters.
 	$class = preg_replace('/[^a-zA-Z0-9]/', '', $class);
 	// Include the class, die if that fails.
@@ -34,10 +34,10 @@ function __autoload($class) {
 
 /**
  * Define a constant, if it isn't already defined.
- *
- * @todo Sanity checks.
  */
 function qb_define($name, $value) {
+	assert(is_string($name));
+	assert(is_scalar($value));
 	if (!defined($name))
 		define($name, $value);
 }
@@ -54,6 +54,13 @@ qb_define('QB_DOCROOT', realpath($_SERVER['DOCUMENT_ROOT']));
 
 // Store the path compontent of the requested URL.
 qb_define('QB_URIPATH', $_SERVER['REQUEST_URI']);
+
+// If there is no class autoloader currently set, define ours.
+if (!function_exists('__autoload'))
+	eval('function __autoload($class) { return (qb_autoload($class)); }');
+
+// Load the default exceptions.
+new qbException();
 
 
 
