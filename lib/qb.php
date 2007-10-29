@@ -18,6 +18,8 @@
 
 
 
+define('QB_VERSION', '0.5alpha');
+
 /**
  * Class autoloader.
  *
@@ -25,7 +27,12 @@
  * @return bool True if the class could be loaded. Else execution stops anyway.
  */
 function qb_autoload($class) {
-	// Remove suspicious characters.
+	assert(is_string($class));
+	// Make sure all exceptions are loaded, they live together in a single file.
+	require_once(QB_LIBDIR . '/qbException.php');
+	// If the class exists now, it was an exception and everything's fine.
+	if (class_exists($class, false))
+		return (true);
 	$class = preg_replace('/[^a-zA-Z0-9]/', '', $class);
 	// Include the class, die if that fails.
 	require_once(QB_LIBDIR . "/$class.php");
@@ -37,9 +44,48 @@ function qb_autoload($class) {
  */
 function qb_define($name, $value) {
 	assert(is_string($name));
-	assert(is_scalar($value));
+	assert(is_scalar($value) || is_null($value));
 	if (!defined($name))
 		define($name, $value);
+}
+
+/**
+ * Test the installation.
+ */
+function qb_test() {
+	header('Content-type: text/plain');
+	echo("Hi. This is qb " . QB_VERSION . ", nice to meet you.\n");
+	echo("If you can read this, you've included qb correctly and requested some tests.\n\n");
+	echo("First of all, some basic settings and what they are set to:\n");
+	echo("qb is installed in:   " . QB_LIBDIR .  "\n");
+	echo("Request origin:       " . QB_REQDIR .  "\n");
+	echo("Server document root: " . QB_DOCROOT . "\n");
+	echo("Requested URI path:   " . QB_URIPATH . "\n\n");
+	if (QB_OURAUTOLOAD) {
+		echo("qb will take care of autoloading its own classes.\n");
+		echo("If your application needs an __autoload() function, please define it\n");
+		echo("before including qb and call qb_autoload(\$class) as a fallback.\n");
+	} else {
+		echo("You have defined your own class autoloader. If autoloading of qb's classes\n");
+		echo("fails, make sure it is calling qb_autoload(\$class) as a fallback.\n");
+	}
+	echo("\nChecking class autoloading...\n");
+	new qbException();
+	echo("Class autoloading seems to be working.\n");
+	echo("\nThis is the end of the automatic tests.\n");
+	echo("Check out http://scytale.name/proj/qb/ if something doesn't work.\n");
+}
+
+/**
+ * Enable debug mode.
+ */
+function qb_debug($switch) {
+	if ($switch) {
+		error_reporting(E_ALL);
+		foreach (array(ASSERT_ACTIVE, ASSERT_WARNING, ASSERT_BAIL) as $opt)
+			if (assert_options($opt, 1) === false)
+				die("QB DEBUG ERROR: Could not set assert option $opt!\n");
+	}
 }
 
 // If there's no information where qb is installed, defaults to "here".
@@ -56,11 +102,12 @@ qb_define('QB_DOCROOT', realpath($_SERVER['DOCUMENT_ROOT']));
 qb_define('QB_URIPATH', $_SERVER['REQUEST_URI']);
 
 // If there is no class autoloader currently set, define ours.
-if (!function_exists('__autoload'))
+if (!function_exists('__autoload')) {
 	eval('function __autoload($class) { return (qb_autoload($class)); }');
-
-// Load the default exceptions.
-new qbException();
+	define('QB_OURAUTOLOAD', true);
+} else {
+	define('QB_OURAUTOLOAD', false);
+}
 
 
 
