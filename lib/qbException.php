@@ -28,7 +28,7 @@ class qbException extends Exception { }
 /**
  * File not found exception.
  */
-class qbFileNotFoundException extends Exception { }
+class qbFileNotFoundException extends qbException { }
 
 
 
