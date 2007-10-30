@@ -22,9 +22,15 @@ define('QB_VERSION', '0.5alpha');
 
 /**
  * Class autoloader.
- *
+ * We don't stop script execution if a class could not be loaded. That way, more
+ * than one autoloader can be chained: There can be only one __autoload()
+ * function in a PHP script. qb checks whether there's already one defined, and
+ * if not, redirects it to this function. So if you are embedding qb in a larger
+ * project, you can write your own __autoload() that will call, among others,
+ * qb_autoload(). If no autoloader could load the class, execution will stop
+ * anyway.
  * @param string $class The class that's currently missing.
- * @return bool True if the class could be loaded. Else execution stops anyway.
+ * @return bool True if the class could be loaded, false if not.
  */
 function qb_autoload($class) {
 	assert(is_string($class));
@@ -34,9 +40,10 @@ function qb_autoload($class) {
 	if (class_exists($class, false))
 		return (true);
 	$class = preg_replace('/[^a-zA-Z0-9]/', '', $class);
-	// Include the class, die if that fails.
-	require_once(QB_LIBDIR . "/$class.php");
-	return (true);
+	// Try to include the class.
+	include_once(QB_LIBDIR . "/$class.php");
+	// Return whether or not the class exists now.
+	return (class_exists($class, false));
 }
 
 /**
