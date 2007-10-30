@@ -23,44 +23,84 @@
  */
 class qbURL {
 
-	/** Stores the URL base path. */
-	protected static $URLBase = null;
+	/** Stores the base directory. */
+	protected static $baseDir = null;
+	
+	/** Stores the base URL. */
+	protected static $baseURL = null;
 
-	/**
-	 * Find the common base of URL and current directory.
+	/** Return the base directory.
+	 *
+	 * The base directory is the topmost directory we are allowed to serve
+	 * files from. This is usually the directory where the calling script is
+	 * installed.
 	 */
-	protected static function matchPaths() {
-		$cwd = trim(QB_REQDIR, ' /');
-		$url = '/' . trim(QB_URIPATH, ' /');
-		var_dump($cwd); var_dump($url);
-		while (true) {
-			// Get position of last slash.
-			$cwdslash = strrpos($cwd, '/');
-			$urlslash = strrpos($url, '/');
-			// Break if there's no slash left in any.
-			if (($cwdslash === false) || ($urlslash === false))
-				break;
-			// Break if the last parts don't match.
-			if (substr($cwd, $cwdslash) != substr($url, $urlslash))
-				break;
-			// Cut off the last part.
-			$cwd = substr($cwd, 0, $cwdslash);
-			$url = substr($url, 0, $urlslash);
-		}
-		return (array($cwd, $url));
+	public static function getBaseDir() {
+		// If none is defined, default to the request directory.
+		if (self::$baseDir === null)
+			return (self::setBaseDir(QB_REQDIR));
+		return (self::$baseDir);
 	}
-
+	
 	/**
-	 * Get the base path of the request URL.
+	 * Set the base directory.
+	 *
+	 * Automatically adds a slash as last character.
 	 */
-	public static function getURLBase() {
-		// If not yet analyzed or set, analyze it.
-		if (self::$URLBase === null) {
-			list(, self::$URLBase) = self::matchPaths();
-		}
-		return (self::$URLBase);
+	public static function setBaseDir($dir) {
+		// Resolve the supplied directory.
+		$base = realpath($dir);
+		// If it doesn't exist, throw exception.
+		if ($base === false)
+			throw new qbFileNotFoundException($dir);
+		// Set and return it.
+		return (self::$baseDir = $base . '/');
 	}
-
+	
+	/**
+	 * Return the URL base.
+	 */
+	public static function getBaseURL() {
+		// If none is defined, try to figure it out automatically.
+		if (self::$baseURL === null) {
+			// SCRIPT_NAME containes the alias name if aliased from outside, and
+			// the virtual filename if not.
+			$base = $_SERVER['SCRIPT_NAME'];
+			return (self::setBaseURL($base));
+		}
+		return (self::$baseURL);
+	}
+	
+	/**
+	 * Set the URL base.
+	 *
+	 * The URL base is the part of the request path that will be stripped: qb
+	 * might not be used to manage a whole host, but only a sub directory.
+	 */
+	public static function setBaseURL($path) {
+		// If set to false or null, use auto-detection.
+		if (($path === false) || ($path === null)) {
+			self::$baseURL = null;
+			return (self::getBaseURL());
+		}
+		assert(is_string($path));
+		return (self::$baseURL = '/' . trim($path, '/'));
+	}
+	
+	/**
+	 * Return the virtual filename.
+	 *
+	 * This is the virtual file the client requested, ie. if qb manages the
+	 * /blog/ directory and the URL http://example.com/blog/foo/bar is called,
+	 * the virtual filename is /foo/bar.
+	 */
+	public static function getVFile() {
+		$path = QB_URIPATH;
+		if (qbString::startsWith(self::getBaseURL(), $path))
+			$path = substr($path, strlen(self::getBaseURL()));
+		return ('/' . trim($path, '/'));
+	}
+	
 }
 
 

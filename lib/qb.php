@@ -71,7 +71,10 @@ function qb_test() {
 	}
 	echo("\nChecking class autoloading...\n");
 	new qbException();
-	echo("Class autoloading seems to be working.\n");
+	echo("Class autoloading seems to be working.\n\n");
+	echo("BaseDir is: " . qbURL::getBaseDir() . "\n");
+	echo("BaseURL is: " . qbURL::getBaseURL() . "\n");
+	echo("Thus, virtual file requested is: " . qbURL::getVFile() . "\n");
 	echo("\nThis is the end of the automatic tests.\n");
 	echo("Check out http://scytale.name/proj/qb/ if something doesn't work.\n");
 }
