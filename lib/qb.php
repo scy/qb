@@ -48,16 +48,29 @@ function qb_autoload($class) {
 
 /**
  * Define a constant, if it isn't already defined.
+ * This function behaves somehow like define(), except that it doesn't try to
+ * define the specified constant if it already exists. That way you can override
+ * even qb's internal constants by defining them before including qb.
+ * @param string $name  The name of the constant.
+ * @param scalar $value Its value, normal PHP constant value restrictions apply.
+ * @return bool True if the constant was not defined before (and thus is defined
+ *   now), false if it already was defined or if the definition did not succeed.
  */
 function qb_define($name, $value) {
 	assert(is_string($name));
 	assert(is_scalar($value) || is_null($value));
 	if (!defined($name))
-		define($name, $value);
+		return (define($name, $value));
+	return (false);
 }
 
 /**
  * Test the installation.
+ * This function checks some of the basic functionality of qb (for example class
+ * autoloading) and shows the value of some internal constants as well as other
+ * useful information like qbURL return values. It can be used to debug your qb
+ * installation.
+ * @return bool True if the function was executed to the end.
  */
 function qb_test() {
 	header('Content-type: text/plain');
@@ -84,10 +97,19 @@ function qb_test() {
 	echo("Thus, virtual file requested is: " . qbURL::getVFile() . "\n");
 	echo("\nThis is the end of the automatic tests.\n");
 	echo("Check out http://scytale.name/proj/qb/ if something doesn't work.\n");
+	return (true);
 }
 
 /**
  * Enable debug mode.
+ * This is nothing but a shorthand for setting PHP's error reporting to the most
+ * verbose level, activating assertions and quit on assertion failure. You
+ * should be able to enable this even on production systems, as it should not
+ * report any warnings at all if everything is fine.
+ * @param bool $switch Set to true to enable debugging, set to false to disable.
+ * @return bool True.
+ * @todo The parameter sucks, since "false" doesn't do anything and this should
+ *   maybe be used to enable some kind of "verbose mode" as well.
  */
 function qb_debug($switch) {
 	if ($switch) {
@@ -96,6 +118,7 @@ function qb_debug($switch) {
 			if (assert_options($opt, 1) === false)
 				die("QB DEBUG ERROR: Could not set assert option $opt!\n");
 	}
+	return (true);
 }
 
 // If there's no information where qb is installed, defaults to "here".
