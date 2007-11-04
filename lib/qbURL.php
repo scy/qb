@@ -66,10 +66,13 @@ class qbURL {
 			// SCRIPT_NAME containes the alias name if aliased from outside, and
 			// the virtual filename if not.
 			$base = $_SERVER['SCRIPT_NAME'];
-			// If there's a dot in the basename, it's most likely a real PHP
-			// script; if not we assume it's an alias.
-			if (strpos(basename($base), '.') !== false)
-				$base = dirname($base);
+			// If there's a dot in the basename, it's most likely a PHP script:
+			if (strpos(basename($base), '.') !== false) {
+				// If we have been called without that script name, assume that
+				// it's not mandatory.
+				if (!qbString::startsWith($_SERVER['SCRIPT_NAME'], QB_URIPATH, false))
+					$base = dirname($base);
+			}
 			return (self::setBaseURL($base));
 		}
 		return (self::$baseURL);
@@ -100,7 +103,7 @@ class qbURL {
 	 */
 	public static function getVFile() {
 		$path = QB_URIPATH;
-		// PATH_INFO is Apache's way of telling us we're aliased from outside.
+		// PATH_INFO is set for Apache's "Alias" directive, it has precedence.
 		if (isset($_SERVER['PATH_INFO']))
 			$path = $_SERVER['PATH_INFO'];
 		else if (qbString::startsWith(self::getBaseURL(), $path))
