@@ -13,7 +13,7 @@ $qb_regex = array(
 	'|<w([a-z]{2}):([^ ]+)>|Ui' => '<w$1:$2 $2>',
 	'|<w([a-z]{2}):([^ ]+) (.+)>|Ui' => '<<http://$1.wikipedia.org/wiki/$2 $3>>',
 	'|<rfc:([0-9]+)>|Ui' => '<rfc:$1 RFC&nbsp;$1>',
-	'|<rfc:([0-9]+ (.+)>|Ui' => '<<http://faqs.org/rfcs/rfc$1.html $2>>',
+	'|<rfc:([0-9]+) (.+)>|Ui' => '<<http://faqs.org/rfcs/rfc$1.html $2>>',
 	'|<<([^ >]+) ([^>]+)>>|Uims' => '<a href=\'$1\'>$2</a>',
 );
 
