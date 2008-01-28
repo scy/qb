@@ -23,7 +23,7 @@ define('QB_TPL_PAGE', 'tpl/fullpage');
 // File name prefix for single-article templates.
 define('QB_TPL_ARTICLE', 'tpl/article');
 // Set to true to remove every dot and colon from the supplied request as a
-// security measure.
+// security measure. DO NOT CHANGE THIS UNLESS YOU KNOW WHAT YOU ARE DOING.
 define('QB_NODOT', true);
 // Where the article source files live.
 define('QB_SRC', 'src/');
