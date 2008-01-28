@@ -10,6 +10,7 @@ $qb_regex = array(
 	'|<rem>(.+)</rem>|Uims' => '<em>$1</em>',
 	'|<(/?)path>|Ui' => '<$1samp>',
 	'|<shell>(.+)</shell>|Uims' => '<pre class=\'shell\'>$1</pre>',
+	'|<log>(.+)</log>|Uims' => '<pre class=\'log\'>$1</pre>',
 	'|<w([a-z]{2}):([^ ]+)>|Ui' => '<w$1:$2 $2>',
 	'|<w([a-z]{2}):([^ ]+) (.+)>|Ui' => '<<http://$1.wikipedia.org/wiki/$2 $3>>',
 	'|<rfc:([0-9]+)>|Ui' => '<rfc:$1 RFC&nbsp;$1>',
