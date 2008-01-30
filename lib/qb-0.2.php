@@ -148,7 +148,7 @@ if (count($items) > 0) {
 	// browsers).
 	$meta['content'] = QB_FOUROHFOUR;
 	$meta['modified'] = time();
-	header('HTTP/1.0 404 Not Found');
+	@header('HTTP/1.0 404 Not Found');
 }
 
 // Set base path for query string fun (pagination and stuff).
