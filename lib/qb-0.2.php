@@ -20,19 +20,8 @@ $mime = array(
 	'atom10' => 'application/atom+xml',
 );
 
-// Make $requri a tuple consisting of "everything before the first question
-// mark" and "everything after it". (The host fragment is NOT included.)
-$requri = explode('?', $_SERVER['REQUEST_URI'], 2);
-// Assign "everything before the first question mark" to $url.
-$url = $requri[0];
-// If $url begins with qb's base directory, remove it. (It really should.)
-if (substr($url, 0, strlen(QB_URLBASE)) == QB_URLBASE)
-	$url = substr($url, strlen(QB_URLBASE));
-// Remove duplicate slashes.
-$url = preg_replace('|/+|', '/', $url);
-// If the last character is a slash, remove it.
-if (substr($url, -1) == '/')
-	$url = substr($url, 0, -1);
+// Assign the requested virtual file to $url.
+$url = qbURL::getVFile();
 // If QB_NODOT is set, remove all dots and colons from the string for security.
 if (QB_NODOT)
 	$url = str_replace(array('.', ':'), '', $url);
@@ -78,8 +67,7 @@ $page = 1;
 // Choose the template to use. Defaults to first in $mime.
 $templates = array_keys($mime);
 $template = $templates[0];
-if (count($requri) > 1) {
-	$qs = $requri[1];
+if (($qs = $_SERVER['QUERY_STRING']) != '') {
 	// If there's a query string, check if it's a template name.
 	if (array_key_exists($qs, $mime)) {
 		// It's a template name, so choose this as the template.
@@ -151,10 +139,15 @@ if (count($items) > 0) {
 	@header('HTTP/1.0 404 Not Found');
 }
 
-// Set base path for query string fun (pagination and stuff).
-$meta['basepath'] = QB_URLBASE . $url;
-// "urlbase" contains exactly the value of QB_URLBASE.
-$meta['urlbase'] = QB_URLBASE;
+// Set URL path for query string fun (pagination and stuff).
+$meta['urlpath'] = qbURL::getHandler() . $url;
+// "basepath" is a really bad name and therefore deprecated.
+$meta['basepath'] = $meta['urlpath'];
+// "urlbase" contains the base path for CSS and stuff, ending with a slash.
+// This will soon be renamed to "basepath" and not contain a slash anymore!
+$meta['urlbase'] = qbURL::getBasePath() . '/';
+// "handler" is the handler path.
+$meta['handler'] = qbURL::getHandler();
 // Throw out a Content-type and charset, if we still can.
 @header('Content-type: '.$mime[$template].'; charset=UTF-8');
 // And now the final page. U can has cheezburger now.
@@ -221,8 +214,8 @@ function qb_buildpage($path, $template = 'html') {
 			// Create a template variable with that value.
 			$meta[$k] = $v;
 		}
-		// "path" contains the URL base plus $path, double slashes removed.
-		$meta['path'] = preg_replace('|/+|', '/', QB_URLBASE . $path);
+		// "path" contains the handler plus $path, double slashes removed.
+		$meta['path'] = preg_replace('|/+|', '/', qbURL::getHandler() . $path);
 		// "content" contains the second and all following lines.
 		$meta['content'] = $page[1];
 		// "escapedcontent" is like "content", but with escaped HTML characters.

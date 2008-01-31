@@ -158,7 +158,8 @@ class qbURL {
 			$path = $_SERVER['PATH_INFO'];
 		else if (qbString::startsWith(self::getHandler(), $path))
 			$path = substr($path, strlen(self::getHandler()));
-		return ('/' . trim($path, '/'));
+		// Cut off the query string, normalize slashes, be done!
+		return ('/' . trim(preg_replace('/\?.+$/', '', $path), '/'));
 	}
 	
 }
