@@ -4,25 +4,25 @@
 
 <head>
 	<link rel='stylesheet' type='text/css' href='<qb:urlbase/>qb.css'/>
-	<link rel='alternate'  type='application/atom+xml' title='scytale.de Atom 1.0 Feed' href='<qb:basepath/>?atom10'/>
-	<title><qb:ifset:title><qb:title/> &laquo; </qb:ifset:title>scytale.name</title>
+	<link rel='alternate'  type='application/atom+xml' title='YOUR SITE NAME HERE Atom 1.0 Feed' href='<qb:urlpath/>?atom10'/>
+	<title><qb:ifset:title><qb:title/> &laquo; </qb:ifset:title>YOUR SITE NAME HERE</title>
 </head>
 
 <body>
-<h1>scytale.name</h1>
-<div id='ye_olde'><<<qb:urlbase/> Startseite>></div>
+<h1>YOUR SITE NAME HERE</h1>
+<div id='ye_olde'><<<qb:handler/> Home>></div>
 <qb:ifset:pages><div class='pagenav'>
-	Seite <qb:thispage/> von <qb:numpages/>&nbsp;&mdash;
-	<qb:ifset:prevpage><a href='<qb:basepath/>?<qb:prevpage/>'></qb:ifset:prevpage>neuere Einträge<qb:ifset:prevpage></a></qb:ifset:prevpage>&nbsp;&ndash;
-	<qb:ifset:nextpage><a href='<qb:basepath/>?<qb:nextpage/>'></qb:ifset:nextpage>ältere Einträge<qb:ifset:nextpage></a></qb:ifset:nextpage>
+	<qb:ifset:prevpage><a href='<qb:urlpath/>?<qb:prevpage/>'></qb:ifset:prevpage>&laquo;&laquo;<qb:ifset:prevpage></a></qb:ifset:prevpage>&nbsp;
+	[&nbsp;<qb:thispage/>&nbsp;/&nbsp;<qb:numpages/>&nbsp;]&nbsp
+	<qb:ifset:nextpage><a href='<qb:urlpath/>?<qb:nextpage/>'></qb:ifset:nextpage>&raquo;&raquo;<qb:ifset:nextpage></a></qb:ifset:nextpage>
 </div></qb:ifset:pages>
 <div id='content'>
 <qb:content/>
 </div>
 <qb:ifset:pages><div class='pagenav'>
-	Seite <qb:thispage/> von <qb:numpages/>&nbsp;&mdash;
-	<qb:ifset:prevpage><a href='<qb:basepath/>?<qb:prevpage/>'></qb:ifset:prevpage>neuere Einträge<qb:ifset:prevpage></a></qb:ifset:prevpage>&nbsp;&ndash;
-	<qb:ifset:nextpage><a href='<qb:basepath/>?<qb:nextpage/>'></qb:ifset:nextpage>ältere Einträge<qb:ifset:nextpage></a></qb:ifset:nextpage>
+	<qb:ifset:prevpage><a href='<qb:urlpath/>?<qb:prevpage/>'></qb:ifset:prevpage>&laquo;&laquo;<qb:ifset:prevpage></a></qb:ifset:prevpage>&nbsp;
+	[&nbsp;<qb:thispage/>&nbsp;/&nbsp;<qb:numpages/>&nbsp;]&nbsp
+	<qb:ifset:nextpage><a href='<qb:urlpath/>?<qb:nextpage/>'></qb:ifset:nextpage>&raquo;&raquo;<qb:ifset:nextpage></a></qb:ifset:nextpage>
 </div></qb:ifset:pages>
 </body>
 

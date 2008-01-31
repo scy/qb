@@ -1,4 +1,19 @@
-CHANGES for qb :: http://scytale.de/proj/qb/
+CHANGES for qb :: http://scytale.name/proj/qb/
+
+Version 0.3.0 (2008-02-xx):
+ - new: Official support for lighttpd.
+ - new: Auto-detection of paths and required URL parts.
+ - removed: QB_BASEURL constant; all that stuff is now configured via the qbURL
+   class (if you need to configure anything at all).
+ - qb-0.2.php is now using the new 0.5 classes internally, but it's still a
+   long way to 0.5.
+ - new: tsfix.php maintenance script fixes your timestamps.
+ - new: Some more regexes in the default config.
+ - new: Creation timestamps are now stored _in_ the .cre files as well.
+ - Moved all kinds of files around; qb.php in the main directory is now just a
+   wrapper for qb-0.2.php. It's the transition to 0.5 going on, but everything
+   should work as it did before.
+ - Template tags documented in the README.html.
 
 Version 0.2.2 (2007-05-06):
  - bugfix for 0.2.1: If the number of items was exactly divisible by

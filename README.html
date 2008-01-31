@@ -19,7 +19,7 @@
 <h2>System Requirements</h2>
 <ul>
 	<li><a href="http://php.net/">PHP 5</a></li>
-	<li><a href="http://httpd.apache.org/">Apache Web Server</a> (others not tested)</li>
+	<li><a href="http://httpd.apache.org/">Apache Web Server</a> or <a href="http://www.lighttpd.net/">lighttpd</a> (others not tested)</li>
 	<li>Unix-based OS (others not tested)</li>
 </ul>
 <p>
@@ -50,6 +50,7 @@
 	Copy all files into a directory in the Document Root of your webserver.
 	You can use a subdirectory or the top directory.
 	You may want to move the <var class="file">htaccess</var> file to <var class="file">.htaccess</var> or create a symlink to it.
+	Lighttpd users may instead want to delete it, although you might as well simply ignore the file.
 </p>
 <p>
 	Inside the <var class="dir">lib</var> directory, copy <var class="file">qb-0.2.conf.dist.php</var> to <var class="file">qb-0.2.conf.php</var> and edit it according to your needs.
@@ -126,6 +127,13 @@
 	If there's no directory with that name, qb will look for a <var class="filesuf">.qb</var> file matching.
 	For example, the request <var class="url">http://scytale.name/qb/foo</var> will look for <var class="file">src/foo.qb</var>.
 	If that doesn't exist also, an "not found" error message will be sent.
+</p>
+<p>
+	If you are not using the <var class="file">.htaccess</var> file to alias the whole directory to qb, you can also use the <var class="file">qb.php</var> file as the request handler.
+	Your URLs will then look like this:
+	<var class="url">http://scytale.name/qb/qb.php/2008/some-article</var>.
+	If you call qb via <var class="file">qb.php</var>, this should be recognized and configured automatically.
+	Contact me if it doesn't, it's a pretty new feature.
 </p>
 <p>
 	There are two other special things that may be passed as "query" part of the URL, i.e. after a question mark.
