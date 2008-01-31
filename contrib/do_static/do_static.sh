@@ -97,4 +97,13 @@ if [ "$(cmp blog.xml ${STATPATH}/blog.xml 2>&1)" ]; then
 	echo "blog.xml updated"
 fi
 
+wget -q -O kde.xml ${BASEURL}/KDE/?atom10
+sed -i -r "s,/QB/,/blog/,g" kde.xml
+sed -i "s,http://der-dakon.net/blog/blog.xml,http://der-dakon.net/blog/kde.xml," kde.xml
+if [ "$(cmp kde.xml ${STATPATH}/kde.xml 2>&1)" ]; then
+	rm -f ${STATPATH}/kde.xml
+	ln kde.xml ${STATPATH}/kde.xml
+	echo "kde.xml updated"
+fi
+
 rm -rf ${TMPDIR}
