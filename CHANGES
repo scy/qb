@@ -13,6 +13,12 @@ Version 0.3.0 (2008-02-xx):
  - Moved all kinds of files around; qb.php in the main directory is now just a
    wrapper for qb-0.2.php. It's the transition to 0.5 going on, but everything
    should work as it did before.
+ - Template tag <qb:basepath/> has been renamed to <qb:urlpath/>, because a
+   base path is something completely different. The old name does still work,
+   though. Also, there's a new <qb:urlbase/> tag that will become
+   <qb:basepath/> as soon as that name is free again. Last but not least
+   there's now <qb:handler/> for all the people who can't use the .htaccess
+   redirection magic.
  - Template tags documented in the README.html.
 
 Version 0.2.2 (2007-05-06):
