@@ -17,6 +17,9 @@ $muf = '.cre';
 
 error_reporting(E_ALL);
 
+if (php_sapi_name() != 'cli')
+	die("This needs to be run from the command line!\n");
+
 if (@filesize('wp-settings.php') !== 0)
 	die("Please don't run this in your wordpress dir and ".
 		"add an empty wp-settings.php file here\n");
