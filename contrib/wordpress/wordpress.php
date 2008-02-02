@@ -5,7 +5,7 @@
 // this software from. It will access your data for reading only.
 // Please also add an empty wp-settings.php!
 
-// Author: Uli 'psychon' Schlachter, based on s9y2qb.pgp from Scytale.
+// Author: Uli 'psychon' Schlachter, based on s9y2qb.php from Scytale.
 // Public domain, no warranty, all that stuff, you know.
 
 // Directory to export to.
