@@ -88,6 +88,8 @@ foreach ($matches as $paths) {
 	sort($paths, SORT_STRING);
 	$items = array_merge($items, $paths);
 }
+// Default values for pages, if pagination is not used.
+$meta['numpages'] = $meta['thispage'] = 1;
 if (defined('QB_MAXITEMS') && $page != -1) { // If pagination is in use.
 	// How many pages are there?
 	$meta['numpages'] = ceil(count($items) / QB_MAXITEMS);
