@@ -22,6 +22,9 @@ function addquotes($string) {
 		('"' . htmlspecialchars($string, ENT_NOQUOTES) . '"'));
 }
 
+if (php_sapi_name() != 'cli')
+	die("This needs to be run from the command line!\n");
+
 $uid = (int)$_SERVER['argv'][1] or die("Please supply a user ID.\n");
 
 require_once('serendipity_config_local.inc.php');
