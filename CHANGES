@@ -14,11 +14,14 @@ Version 0.3.0 (2008-02-xx):
    wrapper for qb-0.2.php. It's the transition to 0.5 going on, but everything
    should work as it did before.
  - Template tag <qb:basepath/> has been renamed to <qb:urlpath/>, because a
-   base path is something completely different. The old name does still work,
-   though. Also, there's a new <qb:urlbase/> tag that will become
-   <qb:basepath/> as soon as that name is free again. Last but not least
-   there's now <qb:handler/> for all the people who can't use the .htaccess
-   redirection magic.
+   base path is something completely different: The basepath tag now contains
+   the URL path to the directory where qb is installed (e.g. "/blog"), but not
+   the path to the current article or directory. As mentioned above, you can
+   find that information now in <qb:urlpath/>. Last but not least there's now
+   <qb:handler/> which is the same as the basepath for the people who are
+   using the .htaccess rewrite, but has an added 'qb.php' (or however you've
+   named qb's handler script) for people who aren't (for example because they
+   are using lighttpd).
  - Template tags documented in the README.html.
 
 Version 0.2.2 (2007-05-06):

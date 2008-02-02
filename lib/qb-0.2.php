@@ -139,13 +139,16 @@ if (count($items) > 0) {
 	@header('HTTP/1.0 404 Not Found');
 }
 
+// Set URL scheme and host and port for permalinks, atom and so on.
+$scheme = 'http'; $schemedefaultport = 80;
+if ($_SERVER['HTTPS'] == 'on') {
+	$scheme = 'https'; $schemedefaultport = 443;
+}
+$meta['urlbase'] = "$scheme://" . $_SERVER['SERVER_NAME'] . ((($port = $_SERVER['SERVER_PORT']) == $schemedefaultport) ? ('') : (":$port"));;
 // Set URL path for query string fun (pagination and stuff).
 $meta['urlpath'] = qbURL::getHandler() . $url;
-// "basepath" is a really bad name and therefore deprecated.
-$meta['basepath'] = $meta['urlpath'];
-// "urlbase" contains the base path for CSS and stuff, ending with a slash.
-// This will soon be renamed to "basepath" and not contain a slash anymore!
-$meta['urlbase'] = qbURL::getBasePath() . '/';
+// "basepath" contains the base path for CSS and stuff, not ending with a slash.
+$meta['basepath'] = qbURL::getBasePath();
 // "handler" is the handler path.
 $meta['handler'] = qbURL::getHandler();
 // Throw out a Content-type and charset, if we still can.

@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <feed xmlns='http://www.w3.org/2005/Atom'>
 
-	<id>http://scytale.name<qb:basepath/>?atom10</id>
-	<title>scytale.name</title>
-	<link href='http://scytale.name<qb:basepath/>'/>
-	<link rel='self' href='http://scytale.name<qb:basepath/>?atom10'/>
+	<id><qb:urlbase/><qb:urlpath/>?atom10</id>
+	<title>YOUR SITE NAME HERE</title>
+	<link href='<qb:urlbase/><qb:urlpath/>'/>
+	<link rel='self' href='<qb:urlbase/><qb:urlpath/>?atom10'/>
 	<qb:ifset:modified><updated><qb:date><qb:modified/>c</qb:date></updated></qb:ifset:modified>
 
 <qb:content/>

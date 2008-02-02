@@ -1,8 +1,8 @@
 <entry>
-	<author><name>Scytale</name></author>
-	<id>http://scytale.de<qb:path/></id>
+	<author><name>YOUR NAME HERE</name></author>
+	<id><qb:urlbase/><qb:path/></id>
 	<qb:ifset:title><title><qb:title/></title></qb:ifset:title>
-	<qb:ifset:path><link href='http://scytale.de<qb:path/>'/></qb:ifset:path>
+	<qb:ifset:path><link href='<qb:urlbase/><qb:path/>'/></qb:ifset:path>
 	<qb:ifset:created><published><qb:date><qb:created/>c</qb:date></published></qb:ifset:created>
 	<qb:ifset:modified><updated><qb:date><qb:modified/>c</qb:date></updated></qb:ifset:modified>
 	<content type='html'><![CDATA[
