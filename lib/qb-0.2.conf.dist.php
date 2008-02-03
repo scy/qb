@@ -4,6 +4,12 @@
 // If you still need to set the base path manually, do it like this:
 // qbURL::setHandler('/blog');
 
+// Your name. Multiple authors currently not supported.
+define('QB_AUTHOR', 'Scytale');
+
+// The name of your blog.
+define('QB_BLOGNAME', 'scytale.name');
+
 // Regexes that are run over each article. See PHP's preg_match() documentation.
 $qb_regex = array(
 	'|<thought>(.+)</thought>|Uims' => '<em>$1</em>',
