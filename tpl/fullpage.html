@@ -4,12 +4,12 @@
 
 <head>
 	<link rel='stylesheet' type='text/css' href='<qb:basepath/>/qb.css'/>
-	<link rel='alternate'  type='application/atom+xml' title='YOUR SITE NAME HERE Atom 1.0 Feed' href='<qb:urlpath/>?atom10'/>
-	<title><qb:ifset:title><qb:title/> &laquo; </qb:ifset:title>YOUR SITE NAME HERE</title>
+	<link rel='alternate'  type='application/atom+xml' title='<qb:blogname/> Atom 1.0 Feed' href='<qb:urlpath/>?atom10'/>
+	<title><qb:ifset:title><qb:title/> &laquo; </qb:ifset:title><qb:blogname/></title>
 </head>
 
 <body>
-<h1>YOUR SITE NAME HERE</h1>
+<h1><qb:blogname/></h1>
 <div id='ye_olde'><<<qb:handler/> Home>></div>
 <qb:ifset:pages><div class='pagenav'>
 	<qb:ifset:prevpage><a href='<qb:urlpath/>?<qb:prevpage/>'></qb:ifset:prevpage>&laquo;&laquo;<qb:ifset:prevpage></a></qb:ifset:prevpage>&nbsp;

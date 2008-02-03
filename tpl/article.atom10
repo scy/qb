@@ -1,5 +1,5 @@
 <entry>
-	<author><name>YOUR NAME HERE</name></author>
+	<author><name><qb:author/></name></author>
 	<id><qb:urlbase/><qb:path/></id>
 	<qb:ifset:title><title><qb:title/></title></qb:ifset:title>
 	<qb:ifset:path><link href='<qb:urlbase/><qb:path/>'/></qb:ifset:path>

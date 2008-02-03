@@ -2,7 +2,7 @@
 <feed xmlns='http://www.w3.org/2005/Atom'>
 
 	<id><qb:urlbase/><qb:urlpath/>?atom10</id>
-	<title>YOUR SITE NAME HERE</title>
+	<title><qb:blogname/></title>
 	<link href='<qb:urlbase/><qb:urlpath/>'/>
 	<link rel='self' href='<qb:urlbase/><qb:urlpath/>?atom10'/>
 	<qb:ifset:modified><updated><qb:date><qb:modified/>c</qb:date></updated></qb:ifset:modified>

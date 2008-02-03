@@ -153,6 +153,9 @@ $meta['urlpath'] = qbURL::getHandler() . $url;
 $meta['basepath'] = qbURL::getBasePath();
 // "handler" is the handler path.
 $meta['handler'] = qbURL::getHandler();
+// Author and site name.
+$meta['author'] = QB_AUTHOR;
+$meta['blogname'] = QB_BLOGNAME;
 // Throw out a Content-type and charset, if we still can.
 @header('Content-type: '.$mime[$template].'; charset=UTF-8');
 // And now the final page. U can has cheezburger now.
