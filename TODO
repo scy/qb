@@ -1,5 +1,4 @@
 v0.3:  - Documentation, for example for the template tags. Oh, and qbURL.
-       - Fix: Calling /blog/hjksdhflgushdfg/?atom10 produces HTML output.
 
 v0.5:  - Put qb under the GPL.
        - Tidy up:
