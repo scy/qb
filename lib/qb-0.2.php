@@ -20,11 +20,8 @@ $mime = array(
 	'atom10' => 'application/atom+xml',
 );
 
-// Assign the requested virtual file to $url.
-$url = qbURL::getVFile();
-// If QB_NODOT is set, remove all dots and colons from the string for security.
-if (QB_NODOT)
-	$url = str_replace(array('.', ':'), '', $url);
+// Assign the requested virtual file to $url, removing strange injection ideas.
+$url = str_replace(array(':', '../'), '', qbURL::getVFile());
 
 // Let $realpath be qb's source directory plus the requested file.
 $realpath = QB_SRC.$url;
@@ -170,6 +167,9 @@ if (defined('QB_END_CALLBACK'))
 function qb_buildpage($path, $template = 'html') {
 	// Set $filename to the real filename.
 	$filename = QB_SRC.$path.QB_SUF_SRC;
+	// Check whether that really is under the source directory.
+	if (!qbString::startsWith(realpath(QB_SRC), realpath($filename), false))
+		return ('');
 	// Set $t to the contents of the file.
 	if (($t = @file_get_contents($filename)) === false) {
 		// If the file doesn't exist, return an error.

@@ -5,6 +5,7 @@ Version 0.3.0 (2008-02-xx):
  - new: Auto-detection of paths and required URL parts.
  - removed: QB_BASEURL constant; all that stuff is now configured via the qbURL
    class (if you need to configure anything at all).
+ - removed: QB_NODOTS setting; directory traversal checks are now done always.
  - qb-0.2.php is now using the new 0.5 classes internally, but it's still a
    long way to 0.5.
  - new: tsfix.php maintenance script fixes your timestamps.
