@@ -143,7 +143,7 @@ $scheme = 'http'; $schemedefaultport = 80;
 if ($_SERVER['HTTPS'] == 'on') {
 	$scheme = 'https'; $schemedefaultport = 443;
 }
-$meta['urlbase'] = "$scheme://" . $_SERVER['SERVER_NAME'] . ((($port = $_SERVER['SERVER_PORT']) == $schemedefaultport) ? ('') : (":$port"));;
+$meta['urlbase'] = "$scheme://" . $_SERVER['SERVER_NAME'] . ((($port = $_SERVER['SERVER_PORT']) == $schemedefaultport) ? ('') : (":$port"));
 // Set URL path for query string fun (pagination and stuff).
 $meta['urlpath'] = qbURL::getHandler() . $url;
 // "basepath" contains the base path for CSS and stuff, not ending with a slash.
