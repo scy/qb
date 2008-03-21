@@ -1,4 +1,5 @@
 v0.3:  - Documentation, for example for the template tags. Oh, and qbURL.
+       - Fix the PHPDoc generating.
 
 v0.5:  - Put qb under the GPL.
        - Tidy up:
