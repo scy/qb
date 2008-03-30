@@ -1,19 +1,14 @@
 <!-- This is invalid HTML, intentionally. -->
 <p>qb is a blog system by <a href="http://scytale.name/">Tim 'Scytale' Weber</a> for people who:</p>
 <ul>
-	<li>don't want to install a database server for blogging every two months</li>
-	<li>prefer performant code</li>
+	<li>don't want to install a database server for a blog that sees a new post every two months</li>
+	<li>want performance nevertheless</li>
 	<li>like to be able to send entries via SCP, cronjobs or other obscure methods</li>
+	<li>maybe want to hack on the code together with a friendly, enthusiastic developer and some contributors</li>
 </ul>
 <p>
-	The default configuration files are those of scytale.name.
-	That means two things:
-	First, you'll want to change it.
-	Second, you'll have some nice examples.
-</p>
-<p>
-	Questions please to <a href="mailto:scy-proj-qb@scytale.name">scy-proj-qb@scytale.name</a> or contact me via IRC, there's a channel called <a href="irc://chat.freenode.net/qb">#qb</a> on <a href="http://freenode.net/">freenode</a>.
-	Other <a href="http://scytale.name/contact/">ways to contact me</a> (for example via Jabber or even phone) are also available.
+	You can contact qb users and developers via IRC, there's a channel called <a href="irc://chat.freenode.net/qb">#qb</a> on <a href="http://freenode.net/">freenode</a>.
+	The main developer <a href="http://scytale.name/contact/">can be contacted</a> by different means (for example via Jabber or even phone).
 </p>
 
 <h2>System Requirements</h2>
@@ -23,7 +18,8 @@
 	<li>Unix-based OS (others not tested)</li>
 </ul>
 <p>
-	Please contact me if you managed to run qb on something "not tested".
+	"Not tested" doesn't mean it's not going to work, just give it a try.
+	If you managed to run qb on something "not tested", drop us a note.
 </p>
 
 <h2>Getting qb</h2>
@@ -33,10 +29,10 @@
 </p>
 <ul>
 	<li>Tarballs are available at <a href="http://scytale.name/proj/qb/dist/">http://scytale.name/proj/qb/dist/</a>. There's a <strong><a href="http://scytale.name/proj/qb/dist/qb-current.tar.gz">direct link to the latest stable qb version</a></strong>.</li>
-	<li>Bleeding edge development is available through the <a href="http://git.or.cz/">Git</a> version control system. You can either use Git's own protocol at <a href="git://scytale.name/qb">git://scytale.name/qb</a> or HTTP at <a href="http://scytale.name/git/qb.git/">http://scytale.name/git/qb.git/</a> to check out the source code (<kbd class="shell">git clone git://scytale.name/qb</kbd>). Note that the Git version is what's powering <a href="http://scytale.name/blog/">my own blog</a>, therefore it should be safe to use it directly and not wait for release tarballs.</li>
+	<li>Bleeding edge, but usually quite stable development code is available through the <a href="http://git.or.cz/">Git</a> version control system. You can either use Git's own protocol at <a href="git://scytale.name/qb">git://scytale.name/qb</a> or HTTP at <a href="http://scytale.name/git/qb.git/">http://scytale.name/git/qb.git/</a> to check out the source code (<kbd class="shell">git clone git://scytale.name/qb</kbd>). Note that the Git version is what's powering <a href="http://scytale.name/blog/">my own blog</a>, therefore it should be safe to use it directly and not wait for release tarballs.</li>
 </ul>
 <p>
-	You can have a look at the <a href="CHANGES">changelog</a> or the <a href="http://scytale.name/proj/qb/doc/">automatically generated source code documentation</a>.
+	You can have a look at the <a href="CHANGES">developer's changelog</a>, the <a href="http://scytale.name/git/qb.git/">version control changelog</a> or the <a href="http://scytale.name/proj/qb/doc/">automatically generated source code documentation</a>.
 </p>
 
 <h2>Installation</h2>
@@ -44,20 +40,22 @@
 	<strong>Warning:</strong>
 	This documentation is updated while qb's development goes on.
 	If you are reading <a href="http://scytale.name/proj/qb/">this file online</a>, keep in mind that the information herein describes qb's current "bleeding edge" Git version.
-	If you did not check out the qb version you would like to install from the Git repository, please refer to the README.html in your tarball instead.
+	If you downloaded a release tarball, please refer to the README.html that's included there instead.
 </p>
 <p>
-	Copy all files into a directory in the Document Root of your webserver.
-	You can use a subdirectory or the top directory.
-	You may want to move the <var class="file">htaccess</var> file to <var class="file">.htaccess</var> or create a symlink to it.
+	Copy all files into a directory somewhere inside the Document Root of your webserver.
+	You can use a subdirectory or the Document Root itself.
+	If you're running Apache, you may want to move the <var class="file">htaccess</var> file to <var class="file">.htaccess</var> or create a symlink to it.
 	Lighttpd users may instead want to delete it, although you might as well simply ignore the file.
 </p>
 <p>
 	Inside the <var class="dir">lib</var> directory, copy <var class="file">qb-0.2.conf.dist.php</var> to <var class="file">qb-0.2.conf.php</var> and edit it according to your needs.
+	(Don't be afraid of its name, even if you downloaded a 0.3 release. See <a href='#versions'>qb versioning</a> below.)
 </p>
 <p>
 	You may wish to create your own templates (find them in <var class="dir">src/</var>) and CSS.
-	The templates to use are linked in <var class="file">qb.cfg.php</var>, the CSS in the template.
+	The templates to use are specified in <var class="file">qb.cfg.php</var>, the CSS in the template.
+	You can find a <a href="#tags">list of template tags</a> below.
 </p>
 <p>
 	Make sure your web server can write to the <var class="const">QB_META</var> directory.
@@ -107,7 +105,9 @@
 </p>
 <pre><code class="html">&lt;a href="http://example.com/link"&gt;Description&lt;/a&gt;</code></pre>
 <p>
-	There's other stuff like <code>&lt;wXX:Lemma_with_underscores Description&gt;</code> which will link to <var class="url">http://XX.wikipedia.org/Lemma_with_underscores</var>.
+	There's other stuff like <code>&lt;wXX:Lemma Description&gt;</code> which will link to <var class="url">http://XX.wikipedia.org/Lemma</var>.
+	Please note that for those Wikipedia links spaces in the article name (that is, the link target) will have to be replaced by underscores like this:
+	<code>&lt;wen:Linus_Torvalds Inventor of Linux&gt;</code>, which will look like <a href="http://en.wikipedia.org/wiki/Linus_Torvalds">Inventor of Linux</a>.
 </p>
 
 <h2>URL Schema</h2>
@@ -132,7 +132,7 @@
 	If you are not using the <var class="file">.htaccess</var> file to alias the whole directory to qb, you can also use the <var class="file">qb.php</var> file as the request handler.
 	Your URLs will then look like this:
 	<var class="url">http://scytale.name/qb/qb.php/2008/some-article</var>.
-	If you call qb via <var class="file">qb.php</var>, this should be recognized and configured automatically.
+	No matter if you call qb via <var class="file">qb.php</var> or using the <var class="file">.htaccess</var>, this should be recognized and configured automatically.
 	Contact me if it doesn't, it's a pretty new feature.
 </p>
 <p>
@@ -144,6 +144,13 @@
 	Second, if the query part is a positive integer, it will be interpreted as page number.
 	<var class="url">http://scytale.name/qb/?3</var> will therefore refer to page three of the articles.
 	Page numbers are used if the number of articles that would match a certain request is larger than the maximum number of articles per page set in the config file.
+</p>
+<p>
+	Note that I consider this URL format quite crappy, and it will change in later versions.
+	But rest assured that I will do everything to keep old links from breaking.
+	And I'm quite good at that:
+	My blog exists for several years now and went through two different authoring softwares as well as three different directories and a domain change.
+	And yet even links to the very first article still work.
 </p>
 
 <h2>Meta Information</h2>
@@ -161,6 +168,116 @@
 	If you delete or move around files in the source directory, orphaned files will not be automatically deleted or moved to the new location.
 </p>
 
+<h2 id="tags">Template Tags</h2>
+<p>
+	qb does nothing to your articles but run some regular expressions over them and aggregate the results.
+	In order to include things like the current page number etc. in the output, there are special strings called "template tags", that look like XML tags.
+	For example, the current page number can be included in a template like this:
+	<code>&lt;qb:thispage/&gt;</code>
+</p>
+<p>
+	Here's a list of available template tags and what they do.
+	All start with the prefix <var>qb:</var>, and I won't explicitly repeat that prefix in the following list.
+</p>
+<dl>
+	<dt>numpages</dt><dd>
+		Number of pages the current view has generated.
+		Useful for "page x of y" constructs.
+	</dd>
+	<dt>pages</dt><dd>
+		Same value as <var>numpages</var>, but only set if the number is greater than 1.
+		Allows you for example to only display a pager if there really are other pages than the current one, see <var>ifset</var> below.
+	</dd>
+	<dt>thispage</dt><dd>
+		The number of the page that is currently being displayed.
+	</dd>
+	<dt>nextpage</dt><dd>
+		If there is a "next" page available (i.e. <var>thispage</var>&nbsp;&lt;&nbsp;<var>numpages</var>), this tag contains its number.
+		Else it is not set, allowing you to only display a "next page" link when there actually is such a thing.
+	</dd>
+	<dt>prevpage</dt><dd>
+		Same as <var>nextpage</var>, but in the other direction.
+		Duh.
+	</dd>
+	<dt>content</dt><dd>
+		The content data.
+		In an article template, this contains the content of the current article, after all regex substitutions have been made.
+		In a page template, this contains the HTML content of all the articles that are to be displayed on this page.
+	</dd>
+	<dt>escapedcontent</dt><dd>
+		Same value as "content", but XML special characters are replaced by their respective entities.
+	</dd>
+	<dt>spantags</dt><dd>
+		The tags set for the current article, each contained in a <code>&lt;span class='tag'&gt;</code> tag.
+		Unset in page templates or if there are no tags.
+	</dt>
+	<dt>ultags</dt><dd>
+		The tags set for the current article, each contained in a <code>&lt;li&gt;</code> tag, wrapped inside an <code>&lt;ul class='tag'&gt;</code>.
+		Unset in page templates or if there are no tags.
+	</dd>
+	<dt>author</dt><dd>
+		The value you set in QB_AUTHOR.
+		At some point in the future, when qb supports multi-author blogs, this will of course contain the author of the current article.
+	</dd>
+	<dt>blogname</dt><dd>
+		The value you set in QB_BLOGNAME.
+	</dd>
+	<dt>modified</dt><dd>
+		A Unix timestamp (seconds since the Epoch).
+		In an article template, this contains the time of the last modification to this article (creation is a modification as well).
+		In a page template, this contains the same value as the youngest article on the current page.
+		In the "article not found" message, this contains a value that represents "now".
+	</dd>
+	<dt>created</dt><dd>
+		A Unix timestamp, existing just in article templates.
+		Contains the article's creation time.
+	</dd>
+	<dt>wasmodified</dt><dd>
+		If <var>modified</var> and <var>created</var> contain the same value, this tag is unset.
+		Otherwise it contains the value of <var>modified</var>, enabling you to only display the modification timestamp if a modification really occured.
+	</dd>
+	<dt>path</dt><dd>
+		Only available in an article template.
+		Contains an absolute URL path to the current article.
+		Note that "absolute" means "starting with a slash", not "starting with <em>http://</em>".
+	</dd>
+	<dt>urlbase</dt><dd>
+		A string consisting of <em>http://</em> (or <em>https://</em>), the server name and port, serving as the basis for building URLs.
+		Does not end in a slash, and the port is only included if it's not the default port of the scheme (80 for http, 443 for https).
+	</dd>
+	<dt>urlpath</dt><dd>
+		The complete URL to the currently displayed page, but without the query string.
+		Useful for building query strings, for example for pagination.
+	</dd>
+	<dt>basepath</dt><dd>
+		The path where qb is installed, not ending in a slash.
+		Useful for constructing links to CSS files and stuff.
+	</dd>
+	<dt>handler</dt><dd>
+		The absolute path to the qb handler, i.e. the script name that will be prepended to the virtual file name.
+		If you're using the supplied <var class="file">.htaccess</var> file, this might as well not end in <var class="file">qb.php</var> but just use the path where qb is installed (and is, in that case, identical to <var>basepath</var>.
+	</dd>
+</dl>
+<p>
+	There are two special tags you can use that contain not only a value, but perform additional logic:
+</p>
+<dl>
+	<dt>ifset</dt><dd>
+		If you want parts of the template to be included only if a certain tag is available, enclose that part of the template into <code>&lt;qb:ifset:<var>tagname</var>&gt;...&lt;/qb:ifset:<var>tagname</var>&gt;</code>.
+		For example, to only show a "modified date" line if the file really has been modified, use something like <code>&lt;qb:ifset:wasmodified&gt;Modified at &lt;qb:wasmodified/&gt;&lt;/qb:ifset:wasmodified&gt;</code>.
+	</dd>
+	<dt>date</dt><dd>
+		This can be used to convert a numeric Unix timestamp into any format <a href="http://php.net/manual/de/function.date.php">PHP's <code>date()</code> function</a> supports.
+		The text content of this tag is split into two parts, the first one being all the digits from the start of the string up to the first non-digit, the second one being all the rest (but excluding any leading spaces).
+		These two things are then simply passed to <code>date()</code> as timestamp and format string parameter, respectively.
+		An example would be something like <code>&lt;qb:date&gt;&lt;qb:created/&gt; j. n. Y, H:i:s (T)&lt;/qb:date&gt;</code>.
+	</dd>
+</dl>
+<p>
+	Additionally, you can create your own article template tags by simply including a new tag name in the article's header line.
+	A sample header line could look like <code>&lt;:Five Years&gt;&lt;tags:music Björk song&gt;&lt;mood:destructively sad&gt;</code>, and a template construct like <code>&lt;qb:ifset:mood&gt;&lt;qb:mood/&gt;&lt;qb:ifset:mood&gt;</code> would then display the mood you're in.
+</p>
+
 <h2>Backing Up and Moving a qb Installation</h2>
 <p>
 	Since qb is only using plain text files, it's easy to create a backup.
@@ -175,3 +292,90 @@
 	<li>Check the permissions of your meta directory. The web server needs to be able to create new files and directories there.</li>
 	<li>Don't forget the .htaccess file and to check your config file whether they are up to date.</li>
 </ul>
+
+<h2>Links</h2>
+<ul>
+	<li><a href="http://cia.vc/stats/project/qb">source code repository tracking at CIA.vc</a></li>
+	<li><a href="http://www.ohloh.net/projects/7831">project statistics, analysis and graphs at Ohloh</a></li>
+	<li>web sites using qb<ul>
+		<li><a href="http://der-dakon.net/blog/">Dakons blog</a> is using a custom script to generate static files</li>
+		<li><a href="http://znc.in/~psychon/blog/qb.php">Who cares?</a> is running qb on lighttpd, without <var class="file">.htaccess</var> support</li>
+		<li><a href="http://scytale.name/blog/">my own blog</a>, of course, using all kinds of freaky things, for example <a href="http://scytale.name/blog/2007/10/24/qb-embed">embedded qb</a></li>
+	</ul>
+</ul>
+
+<h2 id="versions">qb versioning</h2>
+<p>
+	qb is still far from complete (although it does everything that's currently implemented quite well), therefore its version number is still below 1.0.
+	For those interested, here's an overview of the versions that already existed, why they were called that way and what's going to come up next.
+	Details about the changes between various versions are available in the <a href="CHANGES">changelog</a>.
+</p>
+<p>
+	The versioning scheme is quite simple:
+	<var>major</var>.<var>minor</var>.<var>revision</var>.
+	There are no "stable" and "unstable" versions like for example in Linux, all releases are (hoped to be) stable.
+</p>
+<p>
+	The current <var>major</var> version is 0, meaning that qb is not feature-complete enough and the internal architecture is not fixed enough yet to be considered a "complete" product.
+	It will change to 1 once I consider qb to be serious competition to Wordpress; feature-wise, not with regards to security bugs.
+	A major number change is expected every few years.
+</p>
+<p>
+	<var>Minor</var> numbers advance every time a major step in development has been finished.
+	This can be one or more new features, internal restructuring of the code, or both.
+	New minor versions are expected to come up every few months.
+</p>
+<p>
+	If something goes wrong in a <var>x</var>.<var>y</var>.0 release (usually some kind of bug), a new release will be published, having the <var>revision</var> number increased by one.
+	They do not contain new features, but rather fix existing ones.
+</p>
+<p>
+	The 0.2 version, for example, saw two revisions right at the same day the original version was released, because not enough testing went into a new feature and it behaved wrong in exceptional cases.
+	I've learned from these mistakes, and for 0.3 there will be <em>beta</em> "releases" and <em>release candidates</em>.
+</p>
+<p>
+	Beta releases (or beta tags, as they should be called more correctly), are not released at all, at least not via the usual "tarball" method.
+	When working on a new release, at some points I consider the current code base quite stable, and to encourage testing I tag those as "0.3.0b1" (meaning "beta 1") or something in Git.
+	People who are running the Git version and looking forward to the new release can then try out this beta version to have an early preview on what the next big things are going to be.
+	If you're a Git user, but too afraid to update to arbitrary commits, you are encouraged to try out the beta versions.
+</p>
+<p>
+	Release candidates are just what the name implies:
+	Something that might end up being a release.
+	That means I have tested it and consider code and documentation to be stable.
+	However, I cannot test all the rare scenarios other people use qb in, and therefore ask kindly for testing of the candidate by every current user, regardless of whether they use Git or just tarball releases.
+	To support this, I build a complete tarball just like for an ordinary release.
+	Depending on the feedback I receive, the final release will appear sooner or later, but not sooner than two weeks after the last release candidate.
+</p>
+<p>
+	Finally, a short story of qb versions:
+</p>
+<dl>
+	<dt>0.1</dt><dd>
+		After working on my own blog software for a day or two and it seemed to be working quite nice on my own web site, I decided to release it to the public, not only because maybe someone else was as fed up with Serendipity as I was, but also because some of my friends asked me to do it (thanks!).
+	</dd>
+	<dt>0.2</dt><dd>
+		Some days later, the number of articles on my new qb blog had increased up to a point, where the possibility of splitting the output into multiple pages was quite needed.
+		So I took the time to include a pagination feature and comment the code, creating the 0.2 release.
+		Because of some minor bugs in the code I had to rush out two more releases at the same day and decided to do better testing next time.
+	</dd>
+	<dt>0.3</dt><dd>
+		After 0.2 it became clear that qb needs quite a lot of new features.
+		Unfortunately, this was pretty hard to do with the current, hackish architecture.
+		Therefore I decided to do a complete rewrite and make qb a kind of extremely customizable framework written in object-oriented PHP.
+		But since development should continue while rewriting, enabling users to exploit possible new features, all the new code is placed into the current codebase, replacing it more and more.
+		As soon as the old code has been removed completely, the result will be called <em>qb 0.5</em>.
+		In order to make the transition a little less sudden, version 0.3 was created, that partly uses 0.2 code but also takes advantage of new techniques like auto-detection of the path where qb is installed.
+	</dd>
+	<dt>0.4</dt><dd>
+		I'm not quite sure whether there will be another intermediate release before 0.5.
+		If it's going to happen, this is what it will be called.
+		Else there will be no version 0.4.
+	</dd>
+	<dt>0.5</dt><dd>
+		This will be the first completely object oriented, frameworkish release.
+		Feature-wise 0.5 will be quite comparable to the 0.2 releases, e.g. there will still be <em>no</em> comment feature.
+		But the things "under the hood" will have changed quite a lot, and new features should be very easy to integrate by then.
+	</dd>
+</dl>
+
