@@ -1,4 +1,6 @@
 v0.3:  - Fix the PHPDoc generating.
+       - Maybe allow <qb:created> and <qb:modified> to be overridden in a .qb file's header.
+       - Check whether tsfix can be used to import from other blog systems when changing the metadata is not an option.
 
 v0.5:  - Put qb under the GPL.
        - Tidy up:
