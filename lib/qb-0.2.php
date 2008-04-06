@@ -145,7 +145,8 @@ if ($_SERVER['HTTPS'] == 'on') {
 }
 $meta['urlbase'] = "$scheme://" . $_SERVER['SERVER_NAME'] . ((($port = $_SERVER['SERVER_PORT']) == $schemedefaultport) ? ('') : (":$port"));
 // Set URL path for query string fun (pagination and stuff).
-$meta['urlpath'] = qbURL::getHandler() . $url;
+// FIXME: Workaround for root dir problem should go.
+$meta['urlpath'] = preg_replace('|/+|', '/', qbURL::getHandler() . $url);
 // "basepath" contains the base path for CSS and stuff, not ending with a slash.
 $meta['basepath'] = qbURL::getBasePath();
 // "handler" is the handler path.
