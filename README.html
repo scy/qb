@@ -261,7 +261,7 @@
 	</dd>
 </dl>
 <p>
-	There are two special tags you can use that contain not only a value, but perform additional logic:
+	There are three special tags you can use that contain not only a value, but perform additional logic:
 </p>
 <dl>
 	<dt>ifset</dt><dd>
@@ -273,6 +273,11 @@
 		The text content of this tag is split into two parts, the first one being all the digits from the start of the string up to the first non-digit, the second one being all the rest (but excluding any leading spaces).
 		These two things are then simply passed to <code>date()</code> as timestamp and format string parameter, respectively.
 		An example would be something like <code>&lt;qb:date&gt;&lt;qb:created/&gt; j. n. Y, H:i:s (T)&lt;/qb:date&gt;</code>.
+	</dd>
+	<dt>cleanpath</dt><dd>
+		Should be put around everywhere you construct a path, for example a combination like <code>&lt;qb:basepath/&gt;/qb.css</code>.
+		In its current version, <var>cleanpath</var> will simply remove double slashes, which is necessary in the above example if the base path is "<var>/</var>".
+		Soon, <var>cleanpath</var> should do things like protect you a bit from path traversal attacks etc. as well.
 	</dd>
 </dl>
 <p>

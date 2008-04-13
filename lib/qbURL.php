@@ -140,9 +140,7 @@ class qbURL {
 			return (self::getBasePath());
 		}
 		assert(is_string($path));
-		// FIXME: Next line is an ugly workaround for root dir problem.
-		$p = '/' . trim($path, '/'); if ($p == '/') $p = '';
-		return (self::$basePath = $p);
+		return (self::$basePath = '/' . trim($path, '/'));
 	}
 	
 	/**
