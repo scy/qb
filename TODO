@@ -14,9 +14,8 @@ v0.5:  - Put qb under the GPL.
          - Maybe allow URLs without htaccess altogether.
        - Make it possible to use different themes without editing qb.php.
        - Make tsfix.php find lone .cre files.
-       - Introduce a configurable tolerance timespan to keep qb from showing
+       + Introduce a configurable tolerance timespan to keep qb from showing
          articles as "updated" if they have been changed seconds after creation.
-         + Workaround: specify <modified:!> in the first line of the file.
 
 v0.6:  - Modules galore:
          - Comments.

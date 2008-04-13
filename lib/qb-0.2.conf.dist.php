@@ -44,5 +44,8 @@ define('QB_MAXITEMS', 17);
 define('QB_SHORTEN_FEEDS', true);
 // What to send as 404 message. You can't use qb markup here, only normal HTML.
 define('QB_FOUROHFOUR', '<p class=\'error\'>No such article.</p>');
+// If the "modified" time differs no more than this number of seconds, treat the
+// file as unmodified (as if <modified:!> was set).
+define('QB_OOPSTIME', 600);
 
 ?>

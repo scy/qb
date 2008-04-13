@@ -236,8 +236,10 @@ function qb_buildpage($path, $template = 'html') {
 		// "modified" and "created" can be overriden in the meta line.
 		if (!array_key_exists('modified', $meta))
 			$meta['modified'] = filemtime($filename);
-		else if ($meta['modified'] == '!')
-			// If set to "!", simulate an unmodified file.
+		if (($meta['modified'] == '!') ||
+		    (abs($meta['modified'] - $meta['created']) <= QB_OOPSTIME)
+		   )
+			// If set to ! or in oops tolerance, simulate an unmodified file.
 			$meta['modified'] = $meta['created'];
 		// If the two timestamps differ, set "wasmodified".
 		if ($meta['created'] != $meta['modified'])

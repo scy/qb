@@ -30,6 +30,9 @@ Version 0.3.0 (2008-04-xx):
    actual metadata.
  - new: set <modified:!> to make the file appear unmodified.
  - new: <qb:ifnotset:*> tag.
+ - new: QB_OOPSTIME sets a tolerance timespan for file modification after 
+   initial creation; if the difference is less than that, the file won't show 
+   up as "modified" and use the "created" timestamp.
 
 Version 0.2.2 (2007-05-06):
  - bugfix for 0.2.1: If the number of items was exactly divisible by
