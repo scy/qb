@@ -24,6 +24,11 @@ Version 0.3.0 (2008-04-xx):
    named qb's handler script) for people who aren't (for example because they
    are using lighttpd).
  - Template tags and a lot more documented in the README.html.
+ - new: <qb:cleanpath> to remove double slashes and fix root directory 
+   installation problems.
+ - new: set <created:> or <modified:> in the meta line to override the file's 
+   actual metadata.
+ - new: set <modified:!> to make the file appear unmodified.
 
 Version 0.2.2 (2007-05-06):
  - bugfix for 0.2.1: If the number of items was exactly divisible by
