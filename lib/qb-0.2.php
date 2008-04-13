@@ -304,9 +304,13 @@ function qb_template($template, $data) {
 			array('\\', '$'), array('\\\\', '\\$'), $v);
 		// Create regexes for the corresponding <qb:ifset:...> tags.
 		$regex['|<qb:ifset:(' . $nk . ') *>(.*)</qb:ifset:\\1 *>|Us'] = '$2';
+		// Create regexes for the corresponding <qb:ifnotset:...> tags.
+		$regex['|<qb:ifnotset:(' . $nk . ') *>.*</qb:ifnotset:\\1 *>|Us'] = '';
 	}
 	// Create a regex that will eat all other <qb:ifset:...> tags.
 	$regex['|<qb:ifset:([a-z0-9]+) *>.*</qb:ifset:\\1 *>|Us'] = '';
+	// Create a regex that will apply to all other <qb:ifnotset:...> tags.
+	$regex['|<qb:ifnotset:([a-z0-9]+) *>(.*)</qb:ifnotset:\\1 *>|Us'] = '$2';
 	// Create a regex for the date magic.
 	$regex['|<qb:date>([0-9]+) *([^<>]+)</qb:date>|me'] = "date('\$2', \$1)";
 	// Create a regex for the path magic.

@@ -261,12 +261,15 @@
 	</dd>
 </dl>
 <p>
-	There are three special tags you can use that contain not only a value, but perform additional logic:
+	There are four special tags you can use that contain not only a value, but perform additional logic:
 </p>
 <dl>
 	<dt>ifset</dt><dd>
 		If you want parts of the template to be included only if a certain tag is available, enclose that part of the template into <code>&lt;qb:ifset:<var>tagname</var>&gt;...&lt;/qb:ifset:<var>tagname</var>&gt;</code>.
 		For example, to only show a "modified date" line if the file really has been modified, use something like <code>&lt;qb:ifset:wasmodified&gt;Modified at &lt;qb:wasmodified/&gt;&lt;/qb:ifset:wasmodified&gt;</code>.
+	</dd>
+	<dt>ifnotset</dt><dd>
+		Like <var>ifset</var>, just the other way round.
 	</dd>
 	<dt>date</dt><dd>
 		This can be used to convert a numeric Unix timestamp into any format <a href="http://php.net/manual/de/function.date.php">PHP's <code>date()</code> function</a> supports.

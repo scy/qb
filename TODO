@@ -1,7 +1,6 @@
 v0.3:  - Fix the PHPDoc generating.
        - Documentation about overriding qbURL settings.
        - Check whether tsfix can be used to import from other blog systems when changing the metadata is not an option.
-       - Add <qb:ifnotset> tag.
        - Support for "static" pages (dynamically generated, but not visible on the date-ordered main page).
          Not sure if this is an item for 0.3 or rather for a later version.
 
