@@ -197,7 +197,7 @@ function qb_buildpage($path, $template = 'html') {
 			if ($k == 'tags') {
 				// Special case: expand the "tags" tag via a freaky regex that
 				// splits them by spaces, multiword tags can be supplied by
-				// using quotation marks. Should resemble Flickrs tag parsing
+				// using quotation marks. Should resemble Flickr's tag parsing
 				// logic somehow.
 				preg_match_all('%"(?! )([^"]+)(?<! )"|([^ ]+)%', $v, $tags, PREG_PATTERN_ORDER);
 				// Initialize $parsedtags.
@@ -229,10 +229,16 @@ function qb_buildpage($path, $template = 'html') {
 		$meta['content'] = $page[1];
 		// "escapedcontent" is like "content", but with escaped HTML characters.
 		$meta['escapedcontent'] = htmlspecialchars($meta['content']);
-		// "modified" is the modification date of the file.
-		$meta['modified'] = filemtime($filename);
 		// "created" is the date the file was created.
-		$meta['created'] = qb_created($path);
+		if (!array_key_exists('created', $meta))
+			$meta['created'] = qb_created($path);
+		// "modified" is the modification date of the file.
+		// "modified" and "created" can be overriden in the meta line.
+		if (!array_key_exists('modified', $meta))
+			$meta['modified'] = filemtime($filename);
+		else if ($meta['modified'] == '!')
+			// If set to "!", simulate an unmodified file.
+			$meta['modified'] = $meta['created'];
 		// If the two timestamps differ, set "wasmodified".
 		if ($meta['created'] != $meta['modified'])
 			$meta['wasmodified'] = $meta['modified'];

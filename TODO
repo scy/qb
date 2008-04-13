@@ -1,6 +1,5 @@
 v0.3:  - Fix the PHPDoc generating.
        - Documentation about overriding qbURL settings.
-       - Maybe allow <qb:created> and <qb:modified> to be overridden in a .qb file's header.
        - Check whether tsfix can be used to import from other blog systems when changing the metadata is not an option.
        - Add <qb:ifnotset> tag.
        - Support for "static" pages (dynamically generated, but not visible on the date-ordered main page).
@@ -18,6 +17,7 @@ v0.5:  - Put qb under the GPL.
        - Make tsfix.php find lone .cre files.
        - Introduce a configurable tolerance timespan to keep qb from showing
          articles as "updated" if they have been changed seconds after creation.
+         + Workaround: specify <modified:!> in the first line of the file.
 
 v0.6:  - Modules galore:
          - Comments.

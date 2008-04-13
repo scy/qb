@@ -284,6 +284,13 @@
 	Additionally, you can create your own article template tags by simply including a new tag name in the article's header line.
 	A sample header line could look like <code>&lt;:Five Years&gt;&lt;tags:music Björk song&gt;&lt;mood:destructively sad&gt;</code>, and a template construct like <code>&lt;qb:ifset:mood&gt;&lt;qb:mood/&gt;&lt;qb:ifset:mood&gt;</code> would then display the mood you're in.
 </p>
+<p>
+	The values of <var>created</var> and <var>modified</var> can be specified (as an Epoch integer) in the first line of a content file as well.
+	If they are, they override the actual file metadata.
+	This is useful if you can't, for whatever reason, change the file metadata, but the contents.
+	When overriding, you may choose to specify only one or both of them.
+	Also, you can set <var>modified</var> to the special value <code>!</code> (just a single exclamation mark), which will instruct qb to set the <var>modified</var> value to that of <var>created</var>, effectively making the entry appear as though it has never been modified at all.
+</p>
 
 <h2>Backing Up and Moving a qb Installation</h2>
 <p>
