@@ -140,7 +140,7 @@ if (count($items) > 0) {
 
 // Set URL scheme and host and port for permalinks, atom and so on.
 $scheme = 'http'; $schemedefaultport = 80;
-if ($_SERVER['HTTPS'] == 'on') {
+if ((isset($_SERVER['HTTPS'])) && ($_SERVER['HTTPS'] == 'on')) {
 	$scheme = 'https'; $schemedefaultport = 443;
 }
 $meta['urlbase'] = "$scheme://" . $_SERVER['SERVER_NAME'] . ((($port = $_SERVER['SERVER_PORT']) == $schemedefaultport) ? ('') : (":$port"));
