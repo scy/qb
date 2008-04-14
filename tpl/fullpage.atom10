@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <feed xmlns='http://www.w3.org/2005/Atom'>
 
-	<id><qb:cleanpath><qb:urlbase/><qb:urlpath/>?atom10</qb:cleanpath></id>
+	<id><qb:urlbase/><qb:cleanpath><qb:urlpath/>?atom10</qb:cleanpath></id>
 	<title><qb:blogname/></title>
-	<link href='<qb:cleanpath><qb:urlbase/><qb:urlpath/></qb:cleanpath>'/>
-	<link rel='self' href='<qb:cleanpath><qb:urlbase/><qb:urlpath/>?atom10</qb:cleanpath>'/>
+	<link href='<qb:urlbase/><qb:cleanpath><qb:urlpath/></qb:cleanpath>'/>
+	<link rel='self' href='<qb:urlbase/><qb:cleanpath><qb:urlpath/>?atom10</qb:cleanpath>'/>
 	<qb:ifset:modified><updated><qb:date><qb:modified/>c</qb:date></updated></qb:ifset:modified>
 
 <qb:content/>
