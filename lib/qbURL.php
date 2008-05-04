@@ -154,7 +154,7 @@ class qbURL {
 	public static function getVFile() {
 		$path = QB_URIPATH;
 		// PATH_INFO is set for Apache's "Alias" directive, it has precedence.
-		if (isset($_SERVER['PATH_INFO']))
+		if (isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO'] != '')
 			$path = $_SERVER['PATH_INFO'];
 		else if (qbString::startsWith(self::getHandler(), $path))
 			$path = substr($path, strlen(self::getHandler()));
