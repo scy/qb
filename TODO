@@ -3,6 +3,7 @@ v0.3:  - Fix the PHPDoc generating.
        - Check whether tsfix can be used to import from other blog systems when changing the metadata is not an option.
        - Support for "static" pages (dynamically generated, but not visible on the date-ordered main page).
          Not sure if this is an item for 0.3 or rather for a later version.
+       - Check whether there can be problems caused by an empty PATH_INFO wrt 08989d87ca3f194a72ac4d16a52dfffa2a5be5b6.
 
 v0.5:  - Put qb under the GPL.
        - Tidy up:
