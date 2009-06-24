@@ -1,6 +1,9 @@
 CHANGES for qb :: http://scytale.name/proj/qb/
 
-Version 0.3.0 (2008-04-xx):
+On 2008-10-12, Tim dropped the qb maintainership.
+No other maintainer has been found yet.
+
+Git version:
  - new: Official support for lighttpd.
  - new: Auto-detection of paths and required URL parts.
  - removed: QB_BASEURL constant; all that stuff is now configured via the qbURL
