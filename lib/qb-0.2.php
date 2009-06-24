@@ -3,12 +3,8 @@
 /* Copyright 2007 Tim Weber <scy-proj-qb@scytale.name>
 
    This file is part of qb <http://scytale.name/proj/qb/>.
-   However, it belongs to the 0.2 series of qb, which was
-   not released as free software and never will be.
 
-   All code in this file is therefore copyrighted without
-   additional permissions except for using it in your
-   web site free of charge.
+   See the LICENSE file for legal stuff.
    */
 
 // Include configuration file.
