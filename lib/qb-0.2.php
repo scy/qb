@@ -279,7 +279,9 @@ function qb_runpattern($pattern, $string) {
 	foreach ($pattern as $k => $v) {
 		if (!is_array($v)) {
 			// This !is_array() is to catch the "tags" variable.
-			$string = preg_replace($k, $v, $string);
+			$string = (is_object($v) && $v instanceof \Closure)
+				? preg_replace_callback($k, $v, $string)
+				: preg_replace($k, $v, $string);
 		}
 	}
 	return ($string);
@@ -310,9 +312,9 @@ function qb_template($template, $data) {
 	// Create a regex that will apply to all other <qb:ifnotset:...> tags.
 	$regex['|<qb:ifnotset:([a-z0-9]+) *>(.*)</qb:ifnotset:\\1 *>|Us'] = '$2';
 	// Create a regex for the date magic.
-	$regex['|<qb:date>([0-9]+) *([^<>]+)</qb:date>|me'] = "date('\$2', \$1)";
+	$regex['|<qb:date>([0-9]+) *([^<>]+)</qb:date>|m'] = function ($m) { return date($m[2], $m[1]); };
 	// Create a regex for the path magic.
-	$regex['|<qb:cleanpath>([^<>]+)</qb:cleanpath>|me'] = "preg_replace('|/+|', '/', '\$1')";
+	$regex['|<qb:cleanpath>([^<>]+)</qb:cleanpath>|m'] = function ($m) { return preg_replace('|/+|', '/', $m[1]); };
 	// Merge the generated and the configured regexes. Configured ones overwrite
 	// generated ones.
 	$regex = array_merge($regex, $qb_regex);
